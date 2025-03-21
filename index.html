@@ -33,9 +33,14 @@
       margin: 20px auto;
       padding: 0 15px;
     }
-    h1, h2 {
+    h1 {
       text-align: center;
       color: #fff;
+      margin-bottom: 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #ffd700; /* Gold for main title */
       margin-bottom: 20px;
     }
     h3 {
@@ -194,22 +199,6 @@
         </select>
       </div>
       <div class="form-row">
-        <label for="location">Starting Location:</label>
-        <select name="location" required>
-          <option value="" disabled selected>Select Starting Location</option>
-          <option value="Eiffel Tower">Eiffel Tower</option>
-          <option value="Notre-Dame">Notre-Dame</option>
-          <option value="Montmartre">Montmartre</option>
-          <option value="Louvre Museum">Louvre Museum</option>
-          <option value="Champs-Élysées">Champs-Élysées</option>
-          <option value="Latin Quarter">Latin Quarter</option>
-          <option value="Sacré-Cœur">Sacré-Cœur</option>
-          <option value="Luxembourg Gardens">Luxembourg Gardens</option>
-          <option value="Le Marais">Le Marais</option>
-          <option value="Gare du Nord">Gare du Nord</option>
-        </select>
-      </div>
-      <div class="form-row">
         <label for="interests">Interests:</label>
         <select name="interests">
           <option value="" selected>Any Interest</option>
@@ -219,16 +208,6 @@
           <option value="adventure">Adventure</option>
           <option value="shopping">Shopping</option>
           <option value="for-kids">For Kids</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label for="transport">Transport:</label>
-        <select name="transport">
-          <option value="" selected>Any Transport</option>
-          <option value="metro">Metro</option>
-          <option value="taxi">Taxi</option>
-          <option value="train">Train</option>
-          <option value="tramway">Tramway</option>
         </select>
       </div>
       <div class="form-row">
@@ -297,134 +276,128 @@
       "France": {
         "cities": {
           "Paris": {
-            "transport": {
-              "metro": { "cost": 2.3, "url": "https://www.ratp.fr/en", "details": { "baseTime": 20, "baseStops": "Châtelet to Louvre-Rivoli", "station": "Louvre-Rivoli (Line 1)" } },
-              "taxi": { "cost": 16, "url": "https://www.paris.fr/en/pages/taxis-2415", "details": { "baseTime": 15, "baseStops": "Direct" } },
-              "train": { "cost": 3.5, "url": "https://www.sncf.com/en", "details": { "baseTime": 30, "baseStops": "Gare du Nord to Saint-Michel Notre-Dame", "station": "Saint-Michel Notre-Dame (RER B)" } },
-              "tramway": { "cost": 2.3, "url": "https://www.ratp.fr/en", "details": { "baseTime": 25, "baseStops": "Porte de Vincennes to Porte de la Chapelle", "station": "Porte de la Chapelle (T3b)" } }
-            },
             "restaurants": {
               "French": [
-                { "budget": "low", "name": "Chez Gladines", "cost": 15, "url": "https://www.chezgladines.fr/", "time": "afternoon", "interest": "history", "location": "30 Rue des Cinq Diamants", "distance": { "Eiffel Tower": 4, "Notre-Dame": 3, "Montmartre": 6 } },
-                { "budget": "medium", "name": "Brasserie Lipp", "cost": 50, "url": "https://www.brasserielipp.fr/en/", "time": "evening", "interest": "history", "location": "151 Boulevard Saint-Germain", "distance": { "Eiffel Tower": 2, "Notre-Dame": 2, "Montmartre": 4 } },
-                { "budget": "high", "name": "Le Jules Verne", "cost": 150, "url": "https://www.restaurants-toureiffel.com/en/le-jules-verne.html", "time": "evening", "interest": "adventure", "location": "Eiffel Tower, Champ de Mars", "distance": { "Eiffel Tower": 0, "Notre-Dame": 4, "Montmartre": 5 } }
+                { "budget": "low", "name": "Chez Gladines", "cost": 15, "url": "https://www.chezgladines.fr/", "time": "afternoon", "interest": "history" },
+                { "budget": "medium", "name": "Brasserie Lipp", "cost": 50, "url": "https://www.brasserielipp.fr/en/", "time": "evening", "interest": "history" },
+                { "budget": "high", "name": "Le Jules Verne", "cost": 150, "url": "https://www.restaurants-toureiffel.com/en/le-jules-verne.html", "time": "evening", "interest": "adventure" }
               ],
               "Vegan": [
-                { "budget": "low", "name": "Le Grenier de Notre-Dame", "cost": 20, "url": "https://www.legrenierdenotredame.fr/", "time": "afternoon", "interest": "nature", "location": "18 Rue de la Bûcherie", "distance": { "Eiffel Tower": 3, "Notre-Dame": 0, "Montmartre": 4 } },
-                { "budget": "medium", "name": "Le Potager de Charlotte", "cost": 30, "url": "https://www.lepotagerdecharlotte.fr/en/", "time": "evening", "interest": "nature", "location": "12 Rue de la Tour d'Auvergne", "distance": { "Eiffel Tower": 4, "Notre-Dame": 3, "Montmartre": 2 } },
-                { "budget": "high", "name": "Gentle Gourmet", "cost": 60, "url": "https://www.gentlegourmet.fr/", "time": "evening", "interest": "nature", "location": "24 Boulevard de la Bastille", "distance": { "Eiffel Tower": 5, "Notre-Dame": 2, "Montmartre": 5 } }
+                { "budget": "low", "name": "Le Grenier de Notre-Dame", "cost": 20, "url": "https://www.legrenierdenotredame.fr/", "time": "afternoon", "interest": "nature" },
+                { "budget": "medium", "name": "Le Potager de Charlotte", "cost": 30, "url": "https://www.lepotagerdecharlotte.fr/en/", "time": "evening", "interest": "nature" },
+                { "budget": "high", "name": "Gentle Gourmet", "cost": 60, "url": "https://www.gentlegourmet.fr/", "time": "evening", "interest": "nature" }
               ],
               "Italian": [
-                { "budget": "low", "name": "Pizza Julia", "cost": 15, "url": "https://www.pizzajulia.fr/", "time": "afternoon", "interest": "shopping", "location": "43 Rue de Charenton", "distance": { "Eiffel Tower": 5, "Notre-Dame": 2, "Montmartre": 5 } },
-                { "budget": "medium", "name": "Pizzeria Popolare", "cost": 25, "url": "https://www.bigmammagroup.com/en/trattorias/pizzeria-popolare", "time": "evening", "interest": "shopping", "location": "111 Rue Réaumur", "distance": { "Eiffel Tower": 4, "Notre-Dame": 2, "Montmartre": 2 } },
-                { "budget": "high", "name": "Il Vicolo", "cost": 55, "url": "https://www.ilvicolo-paris.fr/", "time": "evening", "interest": "shopping", "location": "15 Rue de Birague", "distance": { "Eiffel Tower": 4, "Notre-Dame": 1, "Montmartre": 4 } }
+                { "budget": "low", "name": "Pizza Julia", "cost": 15, "url": "https://www.pizzajulia.fr/", "time": "afternoon", "interest": "shopping" },
+                { "budget": "medium", "name": "Pizzeria Popolare", "cost": 25, "url": "https://www.bigmammagroup.com/en/trattorias/pizzeria-popolare", "time": "evening", "interest": "shopping" },
+                { "budget": "high", "name": "Il Vicolo", "cost": 55, "url": "https://www.ilvicolo-paris.fr/", "time": "evening", "interest": "shopping" }
               ],
               "Asian": [
-                { "budget": "low", "name": "Kodawari Ramen", "cost": 20, "url": "https://www.kodawari-ramen.com/", "time": "afternoon", "interest": "adventure", "location": "29 Rue Mazarine", "distance": { "Eiffel Tower": 2, "Notre-Dame": 1, "Montmartre": 3 } },
-                { "budget": "medium", "name": "Miss Kô", "cost": 40, "url": "https://www.miss-ko.com/", "time": "evening", "interest": "adventure", "location": "49 Avenue George V", "distance": { "Eiffel Tower": 1, "Notre-Dame": 4, "Montmartre": 4 } },
-                { "budget": "high", "name": "Shang Palace", "cost": 80, "url": "https://www.shangri-la.com/paris/shangrila/dining/restaurants/shang-palace/", "time": "evening", "interest": "adventure", "location": "10 Avenue d'Iéna", "distance": { "Eiffel Tower": 1, "Notre-Dame": 4, "Montmartre": 4 } }
+                { "budget": "low", "name": "Kodawari Ramen", "cost": 20, "url": "https://www.kodawari-ramen.com/", "time": "afternoon", "interest": "adventure" },
+                { "budget": "medium", "name": "Miss Kô", "cost": 40, "url": "https://www.miss-ko.com/", "time": "evening", "interest": "adventure" },
+                { "budget": "high", "name": "Shang Palace", "cost": 80, "url": "https://www.shangri-la.com/paris/shangrila/dining/restaurants/shang-palace/", "time": "evening", "interest": "adventure" }
               ],
               "Fast Food": [
-                { "budget": "low", "name": "McDonald’s", "cost": 10, "url": "https://www.mcdonalds.fr/", "time": "afternoon", "interest": "for-kids", "location": "140 Avenue des Champs-Élysées", "distance": { "Eiffel Tower": 2, "Notre-Dame": 4, "Montmartre": 3 } },
-                { "budget": "medium", "name": "Five Guys", "cost": 15, "url": "https://www.fiveguys.fr/", "time": "evening", "interest": "for-kids", "location": "46 Cour Saint-Émilion", "distance": { "Eiffel Tower": 6, "Notre-Dame": 3, "Montmartre": 6 } },
-                { "budget": "high", "name": "Shake Shack", "cost": 20, "url": "https://www.shakeshack.com/", "time": "evening", "interest": "for-kids", "location": "Paris location TBD", "distance": { "Eiffel Tower": 3, "Notre-Dame": 3, "Montmartre": 3 } }
+                { "budget": "low", "name": "McDonald’s", "cost": 10, "url": "https://www.mcdonalds.fr/", "time": "afternoon", "interest": "for-kids" },
+                { "budget": "medium", "name": "Five Guys", "cost": 15, "url": "https://www.fiveguys.fr/", "time": "evening", "interest": "for-kids" },
+                { "budget": "high", "name": "Shake Shack", "cost": 20, "url": "https://www.shakeshack.com/", "time": "evening", "interest": "for-kids" }
               ],
               "Local Street Food": [
-                { "budget": "low", "name": "Chez Alain Miam Miam", "cost": 10, "url": "https://www.paris.fr/pages/chez-alain-miam-miam-2415", "time": "afternoon", "interest": "art", "location": "Marché Saint-Germain", "distance": { "Eiffel Tower": 2, "Notre-Dame": 2, "Montmartre": 4 } },
-                { "budget": "medium", "name": "Marché des Enfants Rouges", "cost": 12, "url": "https://www.paris.fr/lieux/marche-des-enfants-rouges-1799", "time": "morning", "interest": "art", "location": "39 Rue de Birague", "distance": { "Eiffel Tower": 4, "Notre-Dame": 1, "Montmartre": 4 } },
-                { "budget": "high", "name": "Le Food Market", "cost": 20, "url": "https://www.lefoodmarket.fr/", "time": "evening", "interest": "art", "location": "Boulevard de Belleville", "distance": { "Eiffel Tower": 5, "Notre-Dame": 3, "Montmartre": 3 } }
+                { "budget": "low", "name": "Chez Alain Miam Miam", "cost": 10, "url": "https://www.paris.fr/pages/chez-alain-miam-miam-2415", "time": "afternoon", "interest": "art" },
+                { "budget": "medium", "name": "Marché des Enfants Rouges", "cost": 12, "url": "https://www.paris.fr/lieux/marche-des-enfants-rouges-1799", "time": "morning", "interest": "art" },
+                { "budget": "high", "name": "Le Food Market", "cost": 20, "url": "https://www.lefoodmarket.fr/", "time": "evening", "interest": "art" }
               ]
             },
             "activities": {
               "art": [
-                { "name": "Louvre Museum", "cost": 20, "url": "https://www.louvre.fr/en", "time": "morning", "location": "Rue de Rivoli", "distance": { "Eiffel Tower": 3, "Notre-Dame": 1, "Montmartre": 3 } },
-                { "name": "Musée d’Orsay", "cost": 14, "url": "https://www.musee-orsay.fr/en", "time": "afternoon", "location": "1 Rue de la Légion d'Honneur", "distance": { "Eiffel Tower": 2, "Notre-Dame": 2, "Montmartre": 4 } },
-                { "name": "Centre Pompidou", "cost": 15, "url": "https://www.centrepompidou.fr/en/", "time": "afternoon", "location": "Place Georges-Pompidou", "distance": { "Eiffel Tower": 4, "Notre-Dame": 1, "Montmartre": 3 } },
-                { "name": "Musée Rodin", "cost": 12, "url": "https://www.musee-rodin.fr/en", "time": "morning", "location": "77 Rue de Varenne", "distance": { "Eiffel Tower": 1, "Notre-Dame": 3, "Montmartre": 4 } },
-                { "name": "Musée de l’Orangerie", "cost": 12.5, "url": "https://www.musee-orangerie.fr/en", "time": "afternoon", "location": "Jardin des Tuileries", "distance": { "Eiffel Tower": 2, "Notre-Dame": 2, "Montmartre": 3 } }
+                { "name": "Louvre Museum", "cost": 20, "url": "https://www.louvre.fr/en", "time": "morning" },
+                { "name": "Musée d’Orsay", "cost": 14, "url": "https://www.musee-orsay.fr/en", "time": "afternoon" },
+                { "name": "Centre Pompidou", "cost": 15, "url": "https://www.centrepompidou.fr/en/", "time": "afternoon" },
+                { "name": "Musée Rodin", "cost": 12, "url": "https://www.musee-rodin.fr/en", "time": "morning" },
+                { "name": "Musée de l’Orangerie", "cost": 12.5, "url": "https://www.musee-orangerie.fr/en", "time": "afternoon" }
               ],
               "history": [
-                { "name": "Notre-Dame Cathedral", "cost": 0, "url": "https://www.notredamedeparis.fr/en/", "time": "morning", "location": "6 Parvis Notre-Dame", "distance": { "Eiffel Tower": 4, "Notre-Dame": 0, "Montmartre": 4 } },
-                { "name": "Palace of Versailles", "cost": 19.5, "url": "https://en.chateauversailles.fr/", "time": "afternoon", "location": "Place d'Armes, Versailles", "distance": { "Eiffel Tower": 15, "Notre-Dame": 16, "Montmartre": 17 } },
-                { "name": "Sainte-Chapelle", "cost": 11.5, "url": "https://www.sainte-chapelle.fr/en/", "time": "morning", "location": "8 Boulevard du Palais", "distance": { "Eiffel Tower": 3, "Notre-Dame": 0, "Montmartre": 4 } },
-                { "name": "The Conciergerie", "cost": 9, "url": "https://www.paris-conciergerie.fr/en/", "time": "afternoon", "location": "2 Boulevard du Palais", "distance": { "Eiffel Tower": 3, "Notre-Dame": 0, "Montmartre": 4 } },
-                { "name": "Les Invalides", "cost": 14, "url": "https://www.musee-armee.fr/en/", "time": "afternoon", "location": "129 Rue de Grenelle", "distance": { "Eiffel Tower": 1, "Notre-Dame": 3, "Montmartre": 4 } }
+                { "name": "Notre-Dame Cathedral", "cost": 0, "url": "https://www.notredamedeparis.fr/en/", "time": "morning" },
+                { "name": "Palace of Versailles", "cost": 19.5, "url": "https://en.chateauversailles.fr/", "time": "afternoon" },
+                { "name": "Sainte-Chapelle", "cost": 11.5, "url": "https://www.sainte-chapelle.fr/en/", "time": "morning" },
+                { "name": "The Conciergerie", "cost": 9, "url": "https://www.paris-conciergerie.fr/en/", "time": "afternoon" },
+                { "name": "Les Invalides", "cost": 14, "url": "https://www.musee-armee.fr/en/", "time": "afternoon" }
               ],
               "nature": [
-                { "name": "Jardin des Tuileries", "cost": 0, "url": "https://www.paris.fr/lieux/jardin-des-tuileries-1795", "time": "morning", "location": "Place de la Concorde", "distance": { "Eiffel Tower": 2, "Notre-Dame": 2, "Montmartre": 3 } },
-                { "name": "Bois de Boulogne", "cost": 0, "url": "https://www.paris.fr/lieux/bois-de-boulogne-2468", "time": "afternoon", "location": "Route de Suresnes", "distance": { "Eiffel Tower": 3, "Notre-Dame": 6, "Montmartre": 5 } },
-                { "name": "Luxembourg Gardens", "cost": 0, "url": "https://www.paris.fr/lieux/jardin-du-luxembourg-1807", "time": "morning", "location": "Rue de Médicis", "distance": { "Eiffel Tower": 2, "Notre-Dame": 2, "Montmartre": 4 } },
-                { "name": "Parc des Buttes-Chaumont", "cost": 0, "url": "https://www.paris.fr/lieux/parc-des-buttes-chaumont-1802", "time": "afternoon", "location": "1 Rue Botzaris", "distance": { "Eiffel Tower": 6, "Notre-Dame": 4, "Montmartre": 2 } },
-                { "name": "Jardin des Plantes", "cost": 0, "url": "https://www.jardindesplantesdeparis.fr/en", "time": "morning", "location": "57 Rue Cuvier", "distance": { "Eiffel Tower": 4, "Notre-Dame": 2, "Montmartre": 5 } }
+                { "name": "Jardin des Tuileries", "cost": 0, "url": "https://www.paris.fr/lieux/jardin-des-tuileries-1795", "time": "morning" },
+                { "name": "Bois de Boulogne", "cost": 0, "url": "https://www.paris.fr/lieux/bois-de-boulogne-2468", "time": "afternoon" },
+                { "name": "Luxembourg Gardens", "cost": 0, "url": "https://www.paris.fr/lieux/jardin-du-luxembourg-1807", "time": "morning" },
+                { "name": "Parc des Buttes-Chaumont", "cost": 0, "url": "https://www.paris.fr/lieux/parc-des-buttes-chaumont-1802", "time": "afternoon" },
+                { "name": "Jardin des Plantes", "cost": 0, "url": "https://www.jardindesplantesdeparis.fr/en", "time": "morning" }
               ],
               "adventure": [
-                { "name": "Seine River Cruise", "cost": 15, "url": "https://www.bateauxparisiens.com/en/", "time": "evening", "location": "Port de la Bourdonnais", "distance": { "Eiffel Tower": 0, "Notre-Dame": 4, "Montmartre": 5 } },
-                { "name": "Eiffel Tower Summit", "cost": 26, "url": "https://www.toureiffel.paris/en", "time": "afternoon", "location": "Champ de Mars", "distance": { "Eiffel Tower": 0, "Notre-Dame": 4, "Montmartre": 5 } },
-                { "name": "Paris Catacombs Tour", "cost": 29, "url": "https://www.catacombes.paris.fr/en/", "time": "morning", "location": "1 Avenue du Colonel Henri Rol-Tanguy", "distance": { "Eiffel Tower": 3, "Notre-Dame": 2, "Montmartre": 5 } },
-                { "name": "Bike Tour of Paris", "cost": 35, "url": "https://www.fattiretours.com/paris", "time": "afternoon", "location": "24 Rue Edgar Faure", "distance": { "Eiffel Tower": 2, "Notre-Dame": 4, "Montmartre": 5 } },
-                { "name": "Hot Air Balloon Ride", "cost": 250, "url": "https://www.ballondeparis.com/en/", "time": "morning", "location": "Parc André Citroën", "distance": { "Eiffel Tower": 3, "Notre-Dame": 5, "Montmartre": 6 } }
+                { "name": "Seine River Cruise", "cost": 15, "url": "https://www.bateauxparisiens.com/en/", "time": "evening" },
+                { "name": "Eiffel Tower Summit", "cost": 26, "url": "https://www.toureiffel.paris/en", "time": "afternoon" },
+                { "name": "Paris Catacombs Tour", "cost": 29, "url": "https://www.catacombes.paris.fr/en/", "time": "morning" },
+                { "name": "Bike Tour of Paris", "cost": 35, "url": "https://www.fattiretours.com/paris", "time": "afternoon" },
+                { "name": "Hot Air Balloon Ride", "cost": 250, "url": "https://www.ballondeparis.com/en/", "time": "morning" }
               ],
               "shopping": [
-                { "name": "Galeries Lafayette", "cost": 0, "url": "https://www.galerieslafayette.com/en/", "time": "afternoon", "location": "40 Boulevard Haussmann", "distance": { "Eiffel Tower": 3, "Notre-Dame": 3, "Montmartre": 2 } },
-                { "name": "Champs-Élysées", "cost": 0, "url": "https://www.paris.fr/lieux/avenue-des-champs-elysees-1793", "time": "evening", "location": "Avenue des Champs-Élysées", "distance": { "Eiffel Tower": 2, "Notre-Dame": 4, "Montmartre": 3 } },
-                { "name": "Le Marais Boutiques", "cost": 0, "url": "https://www.paris.fr/lieux/le-marais-1801", "time": "afternoon", "location": "Rue de Birague", "distance": { "Eiffel Tower": 4, "Notre-Dame": 1, "Montmartre": 4 } },
-                { "name": "Marché aux Puces", "cost": 0, "url": "https://marcheauxpuces-saintouen.com/en/", "time": "morning", "location": "Rue des Rosiers, Saint-Ouen", "distance": { "Eiffel Tower": 6, "Notre-Dame": 6, "Montmartre": 2 } },
-                { "name": "Passage des Panoramas", "cost": 0, "url": "https://www.paris.fr/lieux/passage-des-panoramas-1803", "time": "afternoon", "location": "11 Boulevard Montmartre", "distance": { "Eiffel Tower": 4, "Notre-Dame": 2, "Montmartre": 2 } }
+                { "name": "Galeries Lafayette", "cost": 0, "url": "https://www.galerieslafayette.com/en/", "time": "afternoon" },
+                { "name": "Champs-Élysées", "cost": 0, "url": "https://www.paris.fr/lieux/avenue-des-champs-elysees-1793", "time": "evening" },
+                { "name": "Le Marais Boutiques", "cost": 0, "url": "https://www.paris.fr/lieux/le-marais-1801", "time": "afternoon" },
+                { "name": "Marché aux Puces", "cost": 0, "url": "https://marcheauxpuces-saintouen.com/en/", "time": "morning" },
+                { "name": "Passage des Panoramas", "cost": 0, "url": "https://www.paris.fr/lieux/passage-des-panoramas-1803", "time": "afternoon" }
               ],
               "for-kids": [
-                { "name": "Disneyland Paris", "cost": 60, "url": "https://www.disneylandparis.com/en-us/", "time": "afternoon", "location": "Chessy, Marne-la-Vallée", "distance": { "Eiffel Tower": 32, "Notre-Dame": 35, "Montmartre": 30 } },
-                { "name": "Parc de la Villette - Cité des Enfants", "cost": 12, "url": "https://www.cite-sciences.fr/en/children", "time": "morning", "location": "30 Avenue Corentin Cariou", "distance": { "Eiffel Tower": 6, "Notre-Dame": 4, "Montmartre": 2 } },
-                { "name": "Jardin d’Acclimatation", "cost": 5, "url": "https://www.jardindacclimatation.fr/en", "time": "afternoon", "location": "Bois de Boulogne", "distance": { "Eiffel Tower": 3, "Notre-Dame": 6, "Montmartre": 5 } },
-                { "name": "Paris Zoo (Parc Zoologique)", "cost": 20, "url": "https://www.parczoologiquedeparis.fr/en", "time": "morning", "location": "Avenue Daumesnil", "distance": { "Eiffel Tower": 6, "Notre-Dame": 3, "Montmartre": 6 } },
-                { "name": "Aquarium de Paris", "cost": 25, "url": "https://www.aquariumdeparis.com/en", "time": "afternoon", "location": "5 Avenue Albert de Mun", "distance": { "Eiffel Tower": 1, "Notre-Dame": 4, "Montmartre": 5 } }
+                { "name": "Disneyland Paris", "cost": 60, "url": "https://www.disneylandparis.com/en-us/", "time": "afternoon" },
+                { "name": "Parc de la Villette - Cité des Enfants", "cost": 12, "url": "https://www.cite-sciences.fr/en/children", "time": "morning" },
+                { "name": "Jardin d’Acclimatation", "cost": 5, "url": "https://www.jardindacclimatation.fr/en", "time": "afternoon" },
+                { "name": "Paris Zoo (Parc Zoologique)", "cost": 20, "url": "https://www.parczoologiquedeparis.fr/en", "time": "morning" },
+                { "name": "Aquarium de Paris", "cost": 25, "url": "https://www.aquariumdeparis.com/en", "time": "afternoon" }
               ]
             },
             "recommendations": {
               "low": {
                 "activities": [
-                  { "name": "Walk along the Seine", "cost": 0, "url": "https://www.paris.fr/lieux/quais-de-seine-1798", "interest": "art", "time": "morning", "location": "Quai de la Rapée", "distance": { "Eiffel Tower": 4, "Notre-Dame": 2, "Montmartre": 4 } },
-                  { "name": "Picnic at Luxembourg Gardens", "cost": 5, "url": "https://www.paris.fr/lieux/jardin-du-luxembourg-1807", "interest": "nature", "time": "afternoon", "location": "Rue de Médicis", "distance": { "Eiffel Tower": 2, "Notre-Dame": 2, "Montmartre": 4 } },
-                  { "name": "Visit Montmartre", "cost": 0, "url": "https://www.paris.fr/lieux/montmartre-1800", "interest": "history", "time": "evening", "location": "Place du Tertre", "distance": { "Eiffel Tower": 5, "Notre-Dame": 4, "Montmartre": 0 } },
-                  { "name": "Jardin d’Acclimatation", "cost": 5, "url": "https://www.jardindacclimatation.fr/en", "interest": "for-kids", "time": "afternoon", "location": "Bois de Boulogne", "distance": { "Eiffel Tower": 3, "Notre-Dame": 6, "Montmartre": 5 } }
+                  { "name": "Walk along the Seine", "cost": 0, "url": "https://www.paris.fr/lieux/quais-de-seine-1798", "interest": "art", "time": "morning" },
+                  { "name": "Picnic at Luxembourg Gardens", "cost": 5, "url": "https://www.paris.fr/lieux/jardin-du-luxembourg-1807", "interest": "nature", "time": "afternoon" },
+                  { "name": "Visit Montmartre", "cost": 0, "url": "https://www.paris.fr/lieux/montmartre-1800", "interest": "history", "time": "evening" },
+                  { "name": "Jardin d’Acclimatation", "cost": 5, "url": "https://www.jardindacclimatation.fr/en", "interest": "for-kids", "time": "afternoon" }
                 ],
                 "restaurants": [
-                  { "name": "Chez Gladines", "cost": 15, "url": "https://www.chezgladines.fr/", "type": "French", "interest": "history", "time": "afternoon", "location": "30 Rue des Cinq Diamants", "distance": { "Eiffel Tower": 4, "Notre-Dame": 3, "Montmartre": 6 } },
-                  { "name": "Chez Alain Miam Miam", "cost": 10, "url": "https://www.paris.fr/pages/chez-alain-miam-miam-2415", "type": "Local Street Food", "interest": "art", "time": "afternoon", "location": "Marché Saint-Germain", "distance": { "Eiffel Tower": 2, "Notre-Dame": 2, "Montmartre": 4 } },
-                  { "name": "McDonald’s", "cost": 10, "url": "https://www.mcdonalds.fr/", "type": "Fast Food", "interest": "for-kids", "time": "afternoon", "location": "140 Avenue des Champs-Élysées", "distance": { "Eiffel Tower": 2, "Notre-Dame": 4, "Montmartre": 3 } }
+                  { "name": "Chez Gladines", "cost": 15, "url": "https://www.chezgladines.fr/", "type": "French", "interest": "history", "time": "afternoon" },
+                  { "name": "Chez Alain Miam Miam", "cost": 10, "url": "https://www.paris.fr/pages/chez-alain-miam-miam-2415", "type": "Local Street Food", "interest": "art", "time": "afternoon" },
+                  { "name": "McDonald’s", "cost": 10, "url": "https://www.mcdonalds.fr/", "type": "Fast Food", "interest": "for-kids", "time": "afternoon" }
                 ]
               },
               "medium": {
                 "activities": [
-                  { "name": "Seine River Cruise", "cost": 15, "url": "https://www.bateauxparisiens.com/en/", "interest": "adventure", "time": "evening", "location": "Port de la Bourdonnais", "distance": { "Eiffel Tower": 0, "Notre-Dame": 4, "Montmartre": 5 } },
-                  { "name": "Musée Rodin", "cost": 12, "url": "https://www.musee-rodin.fr/en", "interest": "art", "time": "morning", "location": "77 Rue de Varenne", "distance": { "Eiffel Tower": 1, "Notre-Dame": 3, "Montmartre": 4 } },
-                  { "name": "Sainte-Chapelle", "cost": 11.5, "url": "https://www.sainte-chapelle.fr/en/", "interest": "history", "time": "morning", "location": "8 Boulevard du Palais", "distance": { "Eiffel Tower": 3, "Notre-Dame": 0, "Montmartre": 4 } },
-                  { "name": "Parc de la Villette - Cité des Enfants", "cost": 12, "url": "https://www.cite-sciences.fr/en/children", "interest": "for-kids", "time": "morning", "location": "30 Avenue Corentin Cariou", "distance": { "Eiffel Tower": 6, "Notre-Dame": 4, "Montmartre": 2 } }
+                  { "name": "Seine River Cruise", "cost": 15, "url": "https://www.bateauxparisiens.com/en/", "interest": "adventure", "time": "evening" },
+                  { "name": "Musée Rodin", "cost": 12, "url": "https://www.musee-rodin.fr/en", "interest": "art", "time": "morning" },
+                  { "name": "Sainte-Chapelle", "cost": 11.5, "url": "https://www.sainte-chapelle.fr/en/", "interest": "history", "time": "morning" },
+                  { "name": "Parc de la Villette - Cité des Enfants", "cost": 12, "url": "https://www.cite-sciences.fr/en/children", "interest": "for-kids", "time": "morning" }
                 ],
                 "restaurants": [
-                  { "name": "Le Potager de Charlotte", "cost": 30, "url": "https://www.lepotagerdecharlotte.fr/en/", "type": "Vegan", "interest": "nature", "time": "evening", "location": "12 Rue de la Tour d'Auvergne", "distance": { "Eiffel Tower": 4, "Notre-Dame": 3, "Montmartre": 2 } },
-                  { "name": "Pizzeria Popolare", "cost": 25, "url": "https://www.bigmammagroup.com/en/trattorias/pizzeria-popolare", "type": "Italian", "interest": "shopping", "time": "evening", "location": "111 Rue Réaumur", "distance": { "Eiffel Tower": 4, "Notre-Dame": 2, "Montmartre": 2 } },
-                  { "name": "Miss Kô", "cost": 40, "url": "https://www.miss-ko.com/", "type": "Asian", "interest": "adventure", "time": "evening", "location": "49 Avenue George V", "distance": { "Eiffel Tower": 1, "Notre-Dame": 4, "Montmartre": 4 } }
+                  { "name": "Le Potager de Charlotte", "cost": 30, "url": "https://www.lepotagerdecharlotte.fr/en/", "type": "Vegan", "interest": "nature", "time": "evening" },
+                  { "name": "Pizzeria Popolare", "cost": 25, "url": "https://www.bigmammagroup.com/en/trattorias/pizzeria-popolare", "type": "Italian", "interest": "shopping", "time": "evening" },
+                  { "name": "Miss Kô", "cost": 40, "url": "https://www.miss-ko.com/", "type": "Asian", "interest": "adventure", "time": "evening" }
                 ]
               },
               "high": {
                 "activities": [
-                  { "name": "Eiffel Tower Summit", "cost": 26, "url": "https://www.toureiffel.paris/en", "interest": "adventure", "time": "afternoon", "location": "Champ de Mars", "distance": { "Eiffel Tower": 0, "Notre-Dame": 4, "Montmartre": 5 } },
-                  { "name": "Palace of Versailles", "cost": 19.5, "url": "https://en.chateauversailles.fr/", "interest": "history", "time": "afternoon", "location": "Place d'Armes, Versailles", "distance": { "Eiffel Tower": 15, "Notre-Dame": 16, "Montmartre": 17 } },
-                  { "name": "Lido de Paris Cabaret Show", "cost": 85, "url": "https://www.lido.fr/en/", "interest": "adventure", "time": "evening", "location": "116 Avenue des Champs-Élysées", "distance": { "Eiffel Tower": 2, "Notre-Dame": 4, "Montmartre": 3 } },
-                  { "name": "Disneyland Paris", "cost": 60, "url": "https://www.disneylandparis.com/en-us/", "interest": "for-kids", "time": "afternoon", "location": "Chessy, Marne-la-Vallée", "distance": { "Eiffel Tower": 32, "Notre-Dame": 35, "Montmartre": 30 } }
+                  { "name": "Eiffel Tower Summit", "cost": 26, "url": "https://www.toureiffel.paris/en", "interest": "adventure", "time": "afternoon" },
+                  { "name": "Palace of Versailles", "cost": 19.5, "url": "https://en.chateauversailles.fr/", "interest": "history", "time": "afternoon" },
+                  { "name": "Lido de Paris Cabaret Show", "cost": 85, "url": "https://www.lido.fr/en/", "interest": "adventure", "time": "evening" },
+                  { "name": "Disneyland Paris", "cost": 60, "url": "https://www.disneylandparis.com/en-us/", "interest": "for-kids", "time": "afternoon" }
                 ],
                 "restaurants": [
-                  { "name": "Le Jules Verne", "cost": 150, "url": "https://www.restaurants-toureiffel.com/en/le-jules-verne.html", "type": "French", "interest": "adventure", "time": "evening", "location": "Eiffel Tower, Champ de Mars", "distance": { "Eiffel Tower": 0, "Notre-Dame": 4, "Montmartre": 5 } },
-                  { "name": "Shang Palace", "cost": 80, "url": "https://www.shangri-la.com/paris/shangrila/dining/restaurants/shang-palace/", "type": "Asian", "interest": "adventure", "time": "evening", "location": "10 Avenue d'Iéna", "distance": { "Eiffel Tower": 1, "Notre-Dame": 4, "Montmartre": 4 } },
-                  { "name": "Gentle Gourmet", "cost": 60, "url": "https://www.gentlegourmet.fr/", "type": "Vegan", "interest": "nature", "time": "evening", "location": "24 Boulevard de la Bastille", "distance": { "Eiffel Tower": 5, "Notre-Dame": 2, "Montmartre": 5 } }
+                  { "name": "Le Jules Verne", "cost": 150, "url": "https://www.restaurants-toureiffel.com/en/le-jules-verne.html", "type": "French", "interest": "adventure", "time": "evening" },
+                  { "name": "Shang Palace", "cost": 80, "url": "https://www.shangri-la.com/paris/shangrila/dining/restaurants/shang-palace/", "type": "Asian", "interest": "adventure", "time": "evening" },
+                  { "name": "Gentle Gourmet", "cost": 60, "url": "https://www.gentlegourmet.fr/", "type": "Vegan", "interest": "nature", "time": "evening" }
                 ]
               }
             },
             "premiumExtras": {
               "secondaryActivities": [
-                { "name": "Visit the Latin Quarter", "cost": 0, "url": "https://www.paris.fr/lieux/quartier-latin-1804", "time": "afternoon", "interest": "history", "location": "Place Saint-Michel", "distance": { "Eiffel Tower": 3, "Notre-Dame": 1, "Montmartre": 4 } },
-                { "name": "Explore Île de la Cité", "cost": 0, "url": "https://www.paris.fr/lieux/ile-de-la-cite-1805", "time": "morning", "interest": "history", "location": "Île de la Cité", "distance": { "Eiffel Tower": 4, "Notre-Dame": 0, "Montmartre": 4 } },
-                { "name": "Puppet Show at Luxembourg Gardens", "cost": 6, "url": "https://www.paris.fr/lieux/jardin-du-luxembourg-1807", "time": "afternoon", "interest": "for-kids", "location": "Rue de Médicis", "distance": { "Eiffel Tower": 2, "Notre-Dame": 2, "Montmartre": 4 } }
+                { "name": "Visit the Latin Quarter", "cost": 0, "url": "https://www.paris.fr/lieux/quartier-latin-1804", "time": "afternoon", "interest": "history" },
+                { "name": "Explore Île de la Cité", "cost": 0, "url": "https://www.paris.fr/lieux/ile-de-la-cite-1805", "time": "morning", "interest": "history" },
+                { "name": "Puppet Show at Luxembourg Gardens", "cost": 6, "url": "https://www.paris.fr/lieux/jardin-du-luxembourg-1807", "time": "afternoon", "interest": "for-kids" }
               ],
               "localTips": [
                 "Visit the Eiffel Tower early in the morning to avoid crowds.",
@@ -439,29 +412,8 @@
     };
 
     const exchangeRates = { "USD": 1, "EUR": 0.92 };
-    const transportModifiers = {
-      "metro": { timePerKm: 2, costPerKm: 0.1 },
-      "taxi": { timePerKm: 1.5, costPerKm: 1.5 },
-      "train": { timePerKm: 1.8, costPerKm: 0.15 },
-      "tramway": { timePerKm: 2.5, costPerKm: 0.1 }
-    };
 
-    function calculateTransport(startLocation, endLocation, transportType) {
-      const distance = travelData["France"].cities["Paris"].activities.art[0].distance[startLocation] || 5; // Default 5km
-      const endDistance = endLocation.distance[startLocation] || 5;
-      const modifier = transportModifiers[transportType];
-      const time = Math.round(endDistance * modifier.timePerKm);
-      const extraCost = endDistance * modifier.costPerKm;
-      const baseCost = travelData["France"].cities["Paris"].transport[transportType].cost;
-      return {
-        time: `${time} min`,
-        cost: baseCost + extraCost,
-        stops: travelData["France"].cities["Paris"].transport[transportType].details.baseStops,
-        station: travelData["France"].cities["Paris"].transport[transportType].details.station || "N/A"
-      };
-    }
-
-    function getExcitingTitle(type, name, interest) {
+    function getExcitingTitle(type, name, interestOrType) {
       const activityTitles = {
         "art": "Dive into art at",
         "history": "Step back in time at",
@@ -478,7 +430,7 @@
         "Fast Food": "Grab a quick bite at",
         "Local Street Food": "Experience local flavors at"
       };
-      return type === "activity" ? `${activityTitles[interest] || "Explore"}: ${name}` : `${mealTitles[type] || "Have an incredible meal at"}: ${name}`;
+      return type === "activity" ? `${activityTitles[interestOrType] || "Explore"}: ${name}` : `${mealTitles[interestOrType] || "Have an incredible meal at"}: ${name}`;
     }
 
     document.getElementById('travelForm').addEventListener('submit', function(e) {
@@ -486,19 +438,19 @@
       const form = e.target;
       const country = form.country.value;
       const city = form.city.value;
-      const startLocation = form.location.value;
-      const interests = form.interests.value || "art";
-      const transport = form.transport.value || "metro";
-      const food = form.food.value || "French";
+      const interests = homolog(form.interests.value) || "art";
+      const food = homolog(form.food.value) || "French";
       const budget = form.budget.value;
       const currency = form.currency.value || "USD";
       const persons = parseInt(form.persons.value) || 1;
-      const timeOfDay = form.timeOfDay.value || "morning";
+      const timeOfDay = homolog(form.timeOfDay.value) || "morning";
       const code = form.code.value.trim();
       const previewPremium = form.previewPremium.checked;
       let isPremium = code === 'TRAVEL2025' || previewPremium;
 
-      if (!country || !city || !startLocation || !budget || !form.persons.value) {
+      function homolog(str) { return str === "" ? null : str; }
+
+      if (!country || !city || !budget || !form.persons.value) {
         document.getElementById('output').innerHTML = '<p class="error">Please fill in all required fields.</p>';
         return;
       }
@@ -509,44 +461,28 @@
 
       const convertCost = (cost) => Math.round(cost * exchangeRates[currency] * 100) / 100;
 
-      let activities = cityData.activities[interests].filter(a => a.time === timeOfDay);
-      let restaurants = cityData.restaurants[food].filter(r => r.budget === budget && r.time === timeOfDay);
-
-      if (isPremium) {
-        activities.sort((a, b) => a.distance[startLocation] - b.distance[startLocation]);
-        restaurants.sort((a, b) => a.distance[startLocation] - b.distance[startLocation]);
-      }
+      const activities = cityData.activities[interests].filter(a => a.time === timeOfDay);
+      const restaurants = cityData.restaurants[food].filter(r => r.budget === budget && r.time === timeOfDay);
 
       const activity = activities.length > 0 ? activities[0] : cityData.activities[interests][0];
       const restaurant = restaurants.length > 0 ? restaurants[0] : cityData.restaurants[food].find(r => r.budget === budget) || cityData.restaurants[food][0];
-
-      const transportToActivity = isPremium ? calculateTransport(startLocation, activity, transport) : null;
-      const transportToRestaurant = isPremium ? calculateTransport(startLocation, restaurant, transport) : null;
 
       let activityCostPerPerson = convertCost(activity.cost);
       let activityCostTotal = convertCost(activity.cost * persons);
       let restaurantCostPerPerson = convertCost(restaurant.cost);
       let restaurantCostTotal = convertCost(restaurant.cost * persons);
-      let transportCostTotal = isPremium ? convertCost((transportToActivity.cost + transportToRestaurant.cost) * persons) : 0;
-      totalCost = activityCostTotal + restaurantCostTotal + transportCostTotal;
+      totalCost = activityCostTotal + restaurantCostTotal;
       let totalCostPerPerson = totalCost / persons;
 
       let budgetLimit = { "low": 50, "medium": 150, "high": Infinity }[budget];
       if (totalCostPerPerson > budgetLimit) {
         itinerary += `<div class="budget-warning">`;
         itinerary += `<p>Warning: Total cost per person ($${totalCostPerPerson.toFixed(2)} ${currency}) exceeds your budget range of $${budgetLimit.toFixed(2)} ${currency}.</p>`;
-        itinerary += `<button onclick="rearrangeItinerary('${country}', '${city}', '${startLocation}', '${interests}', '${transport}', '${food}', '${budget}', '${currency}', ${persons}, '${timeOfDay}', ${isPremium})">Rearrange to Fit Budget</button>`;
+        itinerary += `<button onclick="rearrangeItinerary('${country}', '${city}', '${interests}', '${food}', '${budget}', '${currency}', ${persons}, '${timeOfDay}', ${isPremium})">Rearrange to Fit Budget</button>`;
         itinerary += `</div>`;
       }
 
       itinerary += `<h3 class="day">Day 1 (Time of Day: ${timeOfDay.charAt(0).toUpperCase() + timeOfDay.slice(1)})</h3>`;
-      itinerary += `<p><strong>Location:</strong> Starting from ${startLocation}</p>`;
-      if (!isPremium) {
-        itinerary += `<p><strong>Transport:</strong> Detailed transport options (time, cost, stops) available with premium subscription!</p>`;
-      } else {
-        itinerary += `<p><strong>Transport to Activity:</strong> ${transport} - $${convertCost(transportToActivity.cost).toFixed(2)} ${currency} per person ($${convertCost(transportToActivity.cost * persons).toFixed(2)} ${currency} total), Time: ${transportToActivity.time}, Stops: ${transportToActivity.stops}, Station: ${transportToActivity.station}, <a href="${cityData.transport[transport].url}" target="_blank">${cityData.transport[transport].url}</a></p>`;
-        itinerary += `<p><strong>Transport to Meal:</strong> ${transport} - $${convertCost(transportToRestaurant.cost).toFixed(2)} ${currency} per person ($${convertCost(transportToRestaurant.cost * persons).toFixed(2)} ${currency} total), Time: ${transportToRestaurant.time}, Stops: ${transportToRestaurant.stops}, Station: ${transportToRestaurant.station}, <a href="${cityData.transport[transport].url}" target="_blank">${cityData.transport[transport].url}</a></p>`;
-      }
       itinerary += `<p><strong>Activity - ${getExcitingTitle("activity", activity.name, interests)}</strong> ($${activityCostPerPerson.toFixed(2)} ${currency} per person, $${activityCostTotal.toFixed(2)} ${currency} total, <a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
       itinerary += `<p><strong>Meal - ${getExcitingTitle("meal", restaurant.name, food)}</strong> ($${restaurantCostPerPerson.toFixed(2)} ${currency} per person, $${restaurantCostTotal.toFixed(2)} ${currency} total, <a href="${restaurant.url}" target="_blank">${restaurant.url}</a>)</p>`;
       itinerary += `<p><strong>Total Estimated Cost:</strong> $${totalCost.toFixed(2)} ${currency} ($${totalCostPerPerson.toFixed(2)} ${currency} per person)</p>`;
@@ -555,8 +491,7 @@
         itinerary += `<h3 class="premium-extras">Premium Extras</h3>`;
         const secondaryActivities = cityData.premiumExtras.secondaryActivities.filter(a => a.time === timeOfDay && a.interest === interests);
         const secondaryActivity = secondaryActivities.length > 0 ? secondaryActivities[0] : cityData.premiumExtras.secondaryActivities.find(a => a.interest === interests) || cityData.premiumExtras.secondaryActivities[0];
-        const transportToSecondary = calculateTransport(startLocation, secondaryActivity, transport);
-        itinerary += `<p><strong>Extra Adventure - ${getExcitingTitle("activity", secondaryActivity.name, interests)}</strong> ($${convertCost(secondaryActivity.cost).toFixed(2)} ${currency} per person, $${convertCost(secondaryActivity.cost * persons).toFixed(2)} ${currency} total, Transport: ${transportToSecondary.time}, <a href="${secondaryActivity.url}" target="_blank">${secondaryActivity.url}</a>)</p>`;
+        itinerary += `<p><strong>Extra Adventure - ${getExcitingTitle("activity", secondaryActivity.name, interests)}</strong> ($${convertCost(secondaryActivity.cost).toFixed(2)} ${currency} per person, $${convertCost(secondaryActivity.cost * persons).toFixed(2)} ${currency} total, <a href="${secondaryActivity.url}" target="_blank">${secondaryActivity.url}</a>)</p>`;
 
         itinerary += `<div class="local-tip">`;
         itinerary += `<h3 class="local-tips">Local Tips</h3>`;
@@ -570,20 +505,16 @@
       itinerary += `<div class="recommendations ${isPremium ? '' : 'hidden'}">`;
       itinerary += `<h3 class="recommendations">Popular Recommendations for Your Budget</h3>`;
       itinerary += `<p><strong>Activities:</strong></p>`;
-      let filteredActivities = recommendations.activities.filter(a => a.time === timeOfDay && a.interest === interests);
-      if (isPremium) filteredActivities.sort((a, b) => a.distance[startLocation] - b.distance[startLocation]);
+      const filteredActivities = recommendations.activities.filter(a => a.time === timeOfDay && a.interest === interests);
       const activitiesToShow = filteredActivities.length > 0 ? filteredActivities : recommendations.activities.filter(a => a.interest === interests);
       activitiesToShow.forEach(activity => {
-        const transportToRecActivity = isPremium ? calculateTransport(startLocation, activity, transport) : null;
-        itinerary += `<p>- ${getExcitingTitle("activity", activity.name, interests)} ($${convertCost(activity.cost).toFixed(2)} ${currency} per person, $${convertCost(activity.cost * persons).toFixed(2)} ${currency} total, ${isPremium ? `Transport: ${transportToRecActivity.time}, ` : ''}<a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
+        itinerary += `<p>- ${getExcitingTitle("activity", activity.name, interests)} ($${convertCost(activity.cost).toFixed(2)} ${currency} per person, $${convertCost(activity.cost * persons).toFixed(2)} ${currency} total, <a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
       });
       itinerary += `<p><strong>Dining:</strong></p>`;
-      let filteredRestaurants = recommendations.restaurants.filter(r => r.time === timeOfDay && r.interest === interests);
-      if (isPremium) filteredRestaurants.sort((a, b) => a.distance[startLocation] - b.distance[startLocation]);
+      const filteredRestaurants = recommendations.restaurants.filter(r => r.time === timeOfDay && r.interest === interests);
       const restaurantsToShow = filteredRestaurants.length > 0 ? filteredRestaurants : recommendations.restaurants.filter(r => r.interest === interests);
       restaurantsToShow.forEach(restaurant => {
-        const transportToRecRestaurant = isPremium ? calculateTransport(startLocation, restaurant, transport) : null;
-        itinerary += `<p>- ${getExcitingTitle("meal", restaurant.name, restaurant.type)} ($${convertCost(restaurant.cost).toFixed(2)} ${currency} per person, $${convertCost(restaurant.cost * persons).toFixed(2)} ${currency} total, ${isPremium ? `Transport: ${transportToRecRestaurant.time}, ` : ''}<a href="${restaurant.url}" target="_blank">${restaurant.url}</a>, ${restaurant.type})</p>`;
+        itinerary += `<p>- ${getExcitingTitle("meal", restaurant.name, restaurant.type)} ($${convertCost(restaurant.cost).toFixed(2)} ${currency} per person, $${convertCost(restaurant.cost * persons).toFixed(2)} ${currency} total, <a href="${restaurant.url}" target="_blank">${restaurant.url}</a>, ${restaurant.type})</p>`;
       });
       itinerary += `</div>`;
 
@@ -597,7 +528,7 @@
       document.getElementById('output').innerHTML = itinerary;
     });
 
-    function rearrangeItinerary(country, city, startLocation, interests, transport, food, budget, currency, persons, timeOfDay, isPremium) {
+    function rearrangeItinerary(country, city, interests, food, budget, currency, persons, timeOfDay, isPremium) {
       const cityData = travelData[country].cities[city];
       let itinerary = `<h2>Your ${city} 1-Day Free Itinerary (${persons} Person${persons > 1 ? 's' : ''}) - Rearranged to Fit Budget</h2>`;
       let totalCost = 0;
@@ -606,32 +537,19 @@
       let budgetLimit = { "low": 50, "medium": 150, "high": Infinity }[budget];
       const remainingBudget = budgetLimit * persons;
 
-      let activities = cityData.activities[interests];
-      if (isPremium) activities.sort((a, b) => a.distance[startLocation] - b.distance[startLocation]);
+      const activities = cityData.activities[interests];
       const activity = activities.find(a => a.cost * persons <= remainingBudget && a.time === timeOfDay) || activities[0];
       let activityCostTotal = convertCost(activity.cost * persons);
       let remainingAfterActivity = remainingBudget - activityCostTotal;
 
-      let restaurants = cityData.restaurants[food];
-      if (isPremium) restaurants.sort((a, b) => a.distance[startLocation] - b.distance[startLocation]);
+      const restaurants = cityData.restaurants[food];
       const restaurant = restaurants.find(r => r.cost * persons <= remainingAfterActivity && r.time === timeOfDay) || restaurants[0];
       let restaurantCostTotal = convertCost(restaurant.cost * persons);
 
-      const transportToActivity = isPremium ? calculateTransport(startLocation, activity, transport) : null;
-      const transportToRestaurant = isPremium ? calculateTransport(startLocation, restaurant, transport) : null;
-      let transportCostTotal = isPremium ? convertCost((transportToActivity.cost + transportToRestaurant.cost) * persons) : 0;
-
-      totalCost = activityCostTotal + restaurantCostTotal + transportCostTotal;
+      totalCost = activityCostTotal + restaurantCostTotal;
       const totalCostPerPerson = totalCost / persons;
 
       itinerary += `<h3 class="day">Day 1 (Time of Day: ${timeOfDay.charAt(0).toUpperCase() + timeOfDay.slice(1)})</h3>`;
-      itinerary += `<p><strong>Location:</strong> Starting from ${startLocation}</p>`;
-      if (!isPremium) {
-        itinerary += `<p><strong>Transport:</strong> Detailed transport options (time, cost, stops) available with premium subscription!</p>`;
-      } else {
-        itinerary += `<p><strong>Transport to Activity:</strong> ${transport} - $${convertCost(transportToActivity.cost).toFixed(2)} ${currency} per person ($${convertCost(transportToActivity.cost * persons).toFixed(2)} ${currency} total), Time: ${transportToActivity.time}, Stops: ${transportToActivity.stops}, Station: ${transportToActivity.station}, <a href="${cityData.transport[transport].url}" target="_blank">${cityData.transport[transport].url}</a></p>`;
-        itinerary += `<p><strong>Transport to Meal:</strong> ${transport} - $${convertCost(transportToRestaurant.cost).toFixed(2)} ${currency} per person ($${convertCost(transportToRestaurant.cost * persons).toFixed(2)} ${currency} total), Time: ${transportToRestaurant.time}, Stops: ${transportToRestaurant.stops}, Station: ${transportToRestaurant.station}, <a href="${cityData.transport[transport].url}" target="_blank">${cityData.transport[transport].url}</a></p>`;
-      }
       itinerary += `<p><strong>Activity - ${getExcitingTitle("activity", activity.name, interests)}</strong> ($${convertCost(activity.cost).toFixed(2)} ${currency} per person, $${activityCostTotal.toFixed(2)} ${currency} total, <a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
       itinerary += `<p><strong>Meal - ${getExcitingTitle("meal", restaurant.name, food)}</strong> ($${convertCost(restaurant.cost).toFixed(2)} ${currency} per person, $${restaurantCostTotal.toFixed(2)} ${currency} total, <a href="${restaurant.url}" target="_blank">${restaurant.url}</a>)</p>`;
       itinerary += `<p><strong>Total Estimated Cost:</strong> $${totalCost.toFixed(2)} ${currency} ($${totalCostPerPerson.toFixed(2)} ${currency} per person)</p>`;
@@ -639,8 +557,7 @@
       if (isPremium) {
         itinerary += `<h3 class="premium-extras">Premium Extras</h3>`;
         const secondaryActivity = cityData.premiumExtras.secondaryActivities.find(a => a.time === timeOfDay && a.interest === interests) || cityData.premiumExtras.secondaryActivities[0];
-        const transportToSecondary = calculateTransport(startLocation, secondaryActivity, transport);
-        itinerary += `<p><strong>Extra Adventure - ${getExcitingTitle("activity", secondaryActivity.name, interests)}</strong> ($${convertCost(secondaryActivity.cost).toFixed(2)} ${currency} per person, $${convertCost(secondaryActivity.cost * persons).toFixed(2)} ${currency} total, Transport: ${transportToSecondary.time}, <a href="${secondaryActivity.url}" target="_blank">${secondaryActivity.url}</a>)</p>`;
+        itinerary += `<p><strong>Extra Adventure - ${getExcitingTitle("activity", secondaryActivity.name, interests)}</strong> ($${convertCost(secondaryActivity.cost).toFixed(2)} ${currency} per person, $${convertCost(secondaryActivity.cost * persons).toFixed(2)} ${currency} total, <a href="${secondaryActivity.url}" target="_blank">${secondaryActivity.url}</a>)</p>`;
 
         itinerary += `<div class="local-tip">`;
         itinerary += `<h3 class="local-tips">Local Tips</h3>`;
@@ -654,18 +571,14 @@
       itinerary += `<div class="recommendations ${isPremium ? '' : 'hidden'}">`;
       itinerary += `<h3 class="recommendations">Popular Recommendations for Your Budget</h3>`;
       itinerary += `<p><strong>Activities:</strong></p>`;
-      let filteredActivities = recommendations.activities.filter(a => a.time === timeOfDay && a.interest === interests);
-      if (isPremium) filteredActivities.sort((a, b) => a.distance[startLocation] - b.distance[startLocation]);
+      const filteredActivities = recommendations.activities.filter(a => a.time === timeOfDay && a.interest === interests);
       filteredActivities.forEach(activity => {
-        const transportToRecActivity = isPremium ? calculateTransport(startLocation, activity, transport) : null;
-        itinerary += `<p>- ${getExcitingTitle("activity", activity.name, interests)} ($${convertCost(activity.cost).toFixed(2)} ${currency} per person, $${convertCost(activity.cost * persons).toFixed(2)} ${currency} total, ${isPremium ? `Transport: ${transportToRecActivity.time}, ` : ''}<a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
+        itinerary += `<p>- ${getExcitingTitle("activity", activity.name, interests)} ($${convertCost(activity.cost).toFixed(2)} ${currency} per person, $${convertCost(activity.cost * persons).toFixed(2)} ${currency} total, <a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
       });
       itinerary += `<p><strong>Dining:</strong></p>`;
-      let filteredRestaurants = recommendations.restaurants.filter(r => r.time === timeOfDay && r.interest === interests);
-      if (isPremium) filteredRestaurants.sort((a, b) => a.distance[startLocation] - b.distance[startLocation]);
+      const filteredRestaurants = recommendations.restaurants.filter(r => r.time === timeOfDay && r.interest === interests);
       filteredRestaurants.forEach(restaurant => {
-        const transportToRecRestaurant = isPremium ? calculateTransport(startLocation, restaurant, transport) : null;
-        itinerary += `<p>- ${getExcitingTitle("meal", restaurant.name, restaurant.type)} ($${convertCost(restaurant.cost).toFixed(2)} ${currency} per person, $${convertCost(restaurant.cost * persons).toFixed(2)} ${currency} total, ${isPremium ? `Transport: ${transportToRecRestaurant.time}, ` : ''}<a href="${restaurant.url}" target="_blank">${restaurant.url}</a>, ${restaurant.type})</p>`;
+        itinerary += `<p>- ${getExcitingTitle("meal", restaurant.name, restaurant.type)} ($${convertCost(restaurant.cost).toFixed(2)} ${currency} per person, $${convertCost(restaurant.cost * persons).toFixed(2)} ${currency} total, <a href="${restaurant.url}" target="_blank">${restaurant.url}</a>, ${restaurant.type})</p>`;
       });
       itinerary += `</div>`;
 
