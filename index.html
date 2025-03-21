@@ -1,5 +1,3 @@
-index.html 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,21 +20,52 @@ index.html
       margin: 20px auto;
       padding: 0 15px;
     }
-    h1 {
+    h1, h2, h3 {
       text-align: center;
       color: #333;
       margin-bottom: 20px;
     }
-    h2 {
-      color: #333;
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    select, input, button {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #output {
       margin-top: 20px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    ul {
-      list-style: none;
-      padding: 0;
+    .error {
+      color: #d9534f;
+      font-weight: bold;
     }
-    li {
-      margin: 10px 0;
+    .upgrade {
+      margin-top: 15px;
+      font-style: italic;
+      text-align: center;
     }
     a {
       color: #007bff;
@@ -52,8 +81,14 @@ index.html
       h1 {
         font-size: 24px;
       }
-      h2 {
+      h2, h3 {
         font-size: 20px;
+      }
+      form, #output {
+        padding: 15px;
+      }
+      select, input, button {
+        font-size: 14px;
       }
     }
   </style>
@@ -61,30 +96,180 @@ index.html
 <body>
   <div class="container">
     <h1>Travel Itinerary Builder</h1>
-    <p>Select a country to explore 1-day free itineraries for its major cities. Upgrade to premium for your full trip!</p>
-    <h2>Countries</h2>
-    <ul>
-      <li><a href="france.html">France</a></li>
-      <li><a href="spain.html">Spain</a></li>
-      <li><a href="united-states.html">United States</a></li>
-      <li><a href="china.html">China</a></li>
-      <li><a href="italy.html">Italy</a></li>
-      <li><a href="turkey.html">Turkey</a></li>
-      <li><a href="mexico.html">Mexico</a></li>
-      <li><a href="thailand.html">Thailand</a></li>
-      <li><a href="germany.html">Germany</a></li>
-      <li><a href="united-kingdom.html">United Kingdom</a></li>
-      <li><a href="japan.html">Japan</a></li>
-      <li><a href="austria.html">Austria</a></li>
-      <li><a href="greece.html">Greece</a></li>
-      <li><a href="malaysia.html">Malaysia</a></li>
-      <li><a href="portugal.html">Portugal</a></li>
-      <li><a href="canada.html">Canada</a></li>
-      <li><a href="netherlands.html">Netherlands</a></li>
-      <li><a href="singapore.html">Singapore</a></li>
-      <li><a href="indonesia.html">Indonesia</a></li>
-      <li><a href="south-korea.html">South Korea</a></li>
-    </ul>
+    <p>Choose your preferences to get a 1-day free itinerary. Upgrade to premium for your full trip!</p>
+    <form id="travelForm">
+      <select name="country" id="countrySelect" required>
+        <option value="" disabled selected>Select Country</option>
+        <option value="France">France</option>
+        <option value="Spain">Spain</option>
+        <option value="United States">United States</option>
+        <option value="China">China</option>
+        <option value="Italy">Italy</option>
+        <option value="Turkey">Turkey</option>
+        <option value="Mexico">Mexico</option>
+        <option value="Thailand">Thailand</option>
+        <option value="Germany">Germany</option>
+        <option value="United Kingdom">United Kingdom</option>
+        <option value="Japan">Japan</option>
+        <option value="Austria">Austria</option>
+        <option value="Greece">Greece</option>
+        <option value="Malaysia">Malaysia</option>
+        <option value="Portugal">Portugal</option>
+        <option value="Canada">Canada</option>
+        <option value="Netherlands">Netherlands</option>
+        <option value="Singapore">Singapore</option>
+        <option value="Indonesia">Indonesia</option>
+        <option value="South Korea">South Korea</option>
+      </select>
+      <select name="city" id="citySelect" required>
+        <option value="" disabled selected>Select City</option>
+      </select>
+      <input type="text" name="interests" placeholder="Interests (e.g., art, history, nature)" required>
+      <input type="text" name="transport" placeholder="Transport (e.g., metro, taxi)" required>
+      <input type="text" name="food" placeholder="Food (e.g., French, Vegan)" required>
+      <input type="text" name="code" placeholder="Premium Code (optional)">
+      <button type="submit">Generate Itinerary</button>
+    </form>
+    <div id="output"></div>
   </div>
+
+  <script>
+    // Static JSON data for 20 countries and their cities (sample data for France; others can be added)
+    const travelData = {
+      "France": {
+        "cities": {
+          "Paris": {
+            "transport": {
+              "metro": { "cost": 2.3, "url": "https://www.ratp.fr/en" },
+              "taxi": { "cost": 16, "url": "https://www.paris.fr/en/pages/taxis-2415" }
+            },
+            "restaurants": {
+              "French": [{ "name": "Le Jules Verne", "cost": 150, "url": "https://www.restaurants-toureiffel.com/en/le-jules-verne.html" }],
+              "Vegan": [{ "name": "Le Potager de Charlotte", "cost": 30, "url": "https://www.lepotagerdecharlotte.fr/en/" }]
+            },
+            "activities": {
+              "art": [{ "name": "Louvre Museum", "cost": 20, "url": "https://www.louvre.fr/en" }],
+              "history": [{ "name": "Notre-Dame Cathedral", "cost": 0, "url": "https://www.notredamedeparis.fr/en/" }],
+              "nature": [{ "name": "Jardin des Tuileries", "cost": 0, "url": "https://www.paris.fr/lieux/jardin-des-tuileries-1795" }],
+              "adventure": [{ "name": "Seine River Cruise", "cost": 15, "url": "https://www.bateauxparisiens.com/en/" }],
+              "shopping": [{ "name": "Galeries Lafayette", "cost": 0, "url": "https://www.galerieslafayette.com/en/" }]
+            }
+          },
+          "Lyon": {
+            "transport": {
+              "metro": { "cost": 2.3, "url": "https://www.tcl.fr/en" },
+              "taxi": { "cost": 15, "url": "https://www.lyon.fr/en/transport/taxis" }
+            },
+            "restaurants": {
+              "French": [{ "name": "Les Lyonnais", "cost": 40, "url": "https://www.leslyonnais.com/en/" }],
+              "Vegan": [{ "name": "Laska", "cost": 25, "url": "https://www.laska-lyon.fr/" }]
+            },
+            "activities": {
+              "art": [{ "name": "Musée des Beaux-Arts", "cost": 8, "url": "https://www.mba-lyon.fr/en" }],
+              "history": [{ "name": "Basilica of Notre-Dame de Fourvière", "cost": 0, "url": "https://www.fourviere.org/en/" }],
+              "nature": [{ "name": "Parc de la Tête d’Or", "cost": 0, "url": "https://www.lyon.fr/en/park/parc-de-la-tete-dor" }],
+              "adventure": [{ "name": "Rhône River Kayaking", "cost": 20, "url": "https://www.lyon-kayak.com/en/" }],
+              "shopping": [{ "name": "Les Halles de Lyon", "cost": 0, "url": "https://www.halles-de-lyon-paul-bocuse.com/en/" }]
+            }
+          }
+          // Add 18 more cities for France (e.g., Marseille, Nice, etc.) upon request
+        }
+      },
+      "Spain": {
+        "cities": {
+          "Madrid": {
+            "transport": {
+              "metro": { "cost": 1.64, "url": "https://www.metromadrid.es/en" },
+              "taxi": { "cost": 12, "url": "https://www.madrid.es/en/taxis" }
+            },
+            "restaurants": {
+              "Spanish": [{ "name": "Botín", "cost": 50, "url": "https://www.botin.es/en/" }],
+              "Vegan": [{ "name": "Vega", "cost": 20, "url": "https://www.vegamadrid.com/" }]
+            },
+            "activities": {
+              "art": [{ "name": "Prado Museum", "cost": 15, "url": "https://www.museodelprado.es/en" }],
+              "history": [{ "name": "Royal Palace", "cost": 10, "url": "https://www.patrimonionacional.es/en/visit/royal-palace-madrid" }],
+              "nature": [{ "name": "Retiro Park", "cost": 0, "url": "https://www.esmadrid.com/en/tourist-information/retiro-park" }],
+              "adventure": [{ "name": "Segway Tour", "cost": 30, "url": "https://www.segwaymadrid.com/" }],
+              "shopping": [{ "name": "Gran Vía", "cost": 0, "url": "https://www.esmadrid.com/en/tourist-information/gran-via" }]
+            }
+          }
+          // Add 19 more cities for Spain (e.g., Barcelona, etc.) upon request
+        }
+      }
+      // Add 18 more countries (e.g., United States, China, etc.) upon request
+    };
+
+    // Populate city dropdown based on selected country
+    document.getElementById('countrySelect').addEventListener('change', function() {
+      const country = this.value;
+      const citySelect = document.getElementById('citySelect');
+      citySelect.innerHTML = '<option value="" disabled selected>Select City</option>';
+
+      if (country && travelData[country]) {
+        const cities = Object.keys(travelData[country].cities);
+        cities.forEach(city => {
+          const option = document.createElement('option');
+          option.value = city;
+          option.textContent = city;
+          citySelect.appendChild(option);
+        });
+      }
+    });
+
+    // Form submission logic
+    document.getElementById('travelForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const country = form.country.value;
+      const city = form.city.value;
+      const interests = form.interests.value.trim().toLowerCase();
+      const transport = form.transport.value.trim().toLowerCase();
+      const food = form.food.value.trim().toLowerCase();
+      const code = form.code.value.trim();
+      const isPremium = code === 'TRAVEL2025';
+
+      // Validate inputs
+      if (!country || !city || !travelData[country] || !travelData[country].cities[city]) {
+        document.getElementById('output').innerHTML = '<p class="error">Please select a valid country and city.</p>';
+        return;
+      }
+      if (!interests) {
+        document.getElementById('output').innerHTML = '<p class="error">Please enter your interests (e.g., art, history, nature).</p>';
+        return;
+      }
+      if (!transport) {
+        document.getElementById('output').innerHTML = '<p class="error">Please enter your preferred transport (e.g., metro, taxi).</p>';
+        return;
+      }
+      if (!food) {
+        document.getElementById('output').innerHTML = '<p class="error">Please enter your food preference (e.g., French, Vegan).</p>';
+        return;
+      }
+
+      const cityData = travelData[country].cities[city];
+      let itinerary = `<h2>Your ${city} 1-Day Free Itinerary</h2>`;
+      let totalCost = 0;
+
+      // Day 1 (free tier is limited to 1 day)
+      const transportOption = cityData.transport[transport] || cityData.transport["metro"];
+      const altTransportOptions = Object.keys(cityData.transport).filter(t => t !== transport);
+      const altTransport = altTransportOptions.length > 0 ? altTransportOptions[0] : transport;
+      const altTransportOption = cityData.transport[altTransport];
+      const activity = cityData.activities[interests] ? cityData.activities[interests][0] : cityData.activities["art"][0];
+      const restaurant = cityData.restaurants[food] ? cityData.restaurants[food][0] : cityData.restaurants[Object.keys(cityData.restaurants)[0]][0];
+      totalCost += transportOption.cost + activity.cost + restaurant.cost;
+
+      itinerary += `<h3>Day 1</h3>`;
+      itinerary += `<p><strong>Transport:</strong> ${transport} ($${transportOption.cost}, <a href="${transportOption.url}" target="_blank">${transportOption.url}</a>)</p>`;
+      if (isPremium) itinerary += `<p><strong>Alternative Transport:</strong> ${altTransport} ($${altTransportOption.cost}, <a href="${altTransportOption.url}" target="_blank">${altTransportOption.url}</a>)</p>`;
+      itinerary += `<p><strong>Activity:</strong> ${activity.name} ($${activity.cost}, <a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
+      itinerary += `<p><strong>Meal:</strong> ${restaurant.name} ($${restaurant.cost}, <a href="${restaurant.url}" target="_blank">${restaurant.url}</a>)</p>`;
+
+      itinerary += `<p class="upgrade">Upgrade to Premium (code: TRAVEL2025) for your full trip plan! <span id="paypal-button-placeholder">[PayPal Button Placeholder]</span></p>`;
+
+      document.getElementById('output').innerHTML = itinerary;
+    });
+  </script>
 </body>
 </html>
