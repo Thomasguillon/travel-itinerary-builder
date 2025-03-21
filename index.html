@@ -35,9 +35,15 @@
     }
     h1, h2, h3 {
       text-align: center;
-      color: #fff;
+      color: #000; /* Changed to black for better contrast */
       margin-bottom: 20px;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8); /* White shadow for pop */
+    }
+    p.subtitle {
+      text-align: center;
+      color: #fff; /* Changed to white for visibility */
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Dark shadow for contrast */
     }
     form {
       background-color: rgba(255, 255, 255, 0.9);
@@ -86,6 +92,21 @@
     .error {
       color: #d9534f;
       font-weight: bold;
+    }
+    .budget-warning {
+      background-color: #fff3cd;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .budget-warning button {
+      margin-top: 10px;
+      background-color: #28a745;
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+    .budget-warning button:hover {
+      background-color: #218838;
     }
     .upgrade {
       margin-top: 15px;
@@ -144,7 +165,7 @@
 <body>
   <div class="container">
     <h1>Travel Itinerary Builder - France</h1>
-    <p>Choose your preferences to get a 1-day free itinerary for Paris, France. Upgrade to premium for more options!</p>
+    <p class="subtitle">Choose your preferences to get a 1-day free itinerary for Paris, France. Upgrade to premium for more options!</p>
     <form id="travelForm">
       <div class="form-row">
         <label for="countrySelect">Country:</label>
@@ -256,34 +277,34 @@
             },
             "restaurants": {
               "French": [
-                { "budget": "low", "name": "Chez Gladines", "cost": 15, "url": "https://www.chezgladines.fr/", "time": "afternoon" },
-                { "budget": "medium", "name": "Brasserie Lipp", "cost": 50, "url": "https://www.brasserielipp.fr/en/", "time": "evening" },
-                { "budget": "high", "name": "Le Jules Verne", "cost": 150, "url": "https://www.restaurants-toureiffel.com/en/le-jules-verne.html", "time": "evening" }
+                { "budget": "low", "name": "Chez Gladines", "cost": 15, "url": "https://www.chezgladines.fr/", "time": "afternoon", "interest": "history" },
+                { "budget": "medium", "name": "Brasserie Lipp", "cost": 50, "url": "https://www.brasserielipp.fr/en/", "time": "evening", "interest": "history" },
+                { "budget": "high", "name": "Le Jules Verne", "cost": 150, "url": "https://www.restaurants-toureiffel.com/en/le-jules-verne.html", "time": "evening", "interest": "adventure" }
               ],
               "Vegan": [
-                { "budget": "low", "name": "Le Grenier de Notre-Dame", "cost": 20, "url": "https://www.legrenierdenotredame.fr/", "time": "afternoon" },
-                { "budget": "medium", "name": "Le Potager de Charlotte", "cost": 30, "url": "https://www.lepotagerdecharlotte.fr/en/", "time": "evening" },
-                { "budget": "high", "name": "Gentle Gourmet", "cost": 60, "url": "https://www.gentlegourmet.fr/", "time": "evening" }
+                { "budget": "low", "name": "Le Grenier de Notre-Dame", "cost": 20, "url": "https://www.legrenierdenotredame.fr/", "time": "afternoon", "interest": "nature" },
+                { "budget": "medium", "name": "Le Potager de Charlotte", "cost": 30, "url": "https://www.lepotagerdecharlotte.fr/en/", "time": "evening", "interest": "nature" },
+                { "budget": "high", "name": "Gentle Gourmet", "cost": 60, "url": "https://www.gentlegourmet.fr/", "time": "evening", "interest": "nature" }
               ],
               "Italian": [
-                { "budget": "low", "name": "Pizza Julia", "cost": 15, "url": "https://www.pizzajulia.fr/", "time": "afternoon" },
-                { "budget": "medium", "name": "Pizzeria Popolare", "cost": 25, "url": "https://www.bigmammagroup.com/en/trattorias/pizzeria-popolare", "time": "evening" },
-                { "budget": "high", "name": "Il Vicolo", "cost": 55, "url": "https://www.ilvicolo-paris.fr/", "time": "evening" }
+                { "budget": "low", "name": "Pizza Julia", "cost": 15, "url": "https://www.pizzajulia.fr/", "time": "afternoon", "interest": "shopping" },
+                { "budget": "medium", "name": "Pizzeria Popolare", "cost": 25, "url": "https://www.bigmammagroup.com/en/trattorias/pizzeria-popolare", "time": "evening", "interest": "shopping" },
+                { "budget": "high", "name": "Il Vicolo", "cost": 55, "url": "https://www.ilvicolo-paris.fr/", "time": "evening", "interest": "shopping" }
               ],
               "Asian": [
-                { "budget": "low", "name": "Kodawari Ramen", "cost": 20, "url": "https://www.kodawari-ramen.com/", "time": "afternoon" },
-                { "budget": "medium", "name": "Miss Kô", "cost": 40, "url": "https://www.miss-ko.com/", "time": "evening" },
-                { "budget": "high", "name": "Shang Palace", "cost": 80, "url": "https://www.shangri-la.com/paris/shangrila/dining/restaurants/shang-palace/", "time": "evening" }
+                { "budget": "low", "name": "Kodawari Ramen", "cost": 20, "url": "https://www.kodawari-ramen.com/", "time": "afternoon", "interest": "adventure" },
+                { "budget": "medium", "name": "Miss Kô", "cost": 40, "url": "https://www.miss-ko.com/", "time": "evening", "interest": "adventure" },
+                { "budget": "high", "name": "Shang Palace", "cost": 80, "url": "https://www.shangri-la.com/paris/shangrila/dining/restaurants/shang-palace/", "time": "evening", "interest": "adventure" }
               ],
               "Fast Food": [
-                { "budget": "low", "name": "McDonald’s", "cost": 10, "url": "https://www.mcdonalds.fr/", "time": "afternoon" },
-                { "budget": "medium", "name": "Five Guys", "cost": 15, "url": "https://www.fiveguys.fr/", "time": "evening" },
-                { "budget": "high", "name": "Shake Shack", "cost": 20, "url": "https://www.shakeshack.com/", "time": "evening" }
+                { "budget": "low", "name": "McDonald’s", "cost": 10, "url": "https://www.mcdonalds.fr/", "time": "afternoon", "interest": "kids" },
+                { "budget": "medium", "name": "Five Guys", "cost": 15, "url": "https://www.fiveguys.fr/", "time": "evening", "interest": "kids" },
+                { "budget": "high", "name": "Shake Shack", "cost": 20, "url": "https://www.shakeshack.com/", "time": "evening", "interest": "kids" }
               ],
               "Local Street Food": [
-                { "budget": "low", "name": "Chez Alain Miam Miam", "cost": 10, "url": "https://www.paris.fr/pages/chez-alain-miam-miam-2415", "time": "afternoon" },
-                { "budget": "medium", "name": "Marché des Enfants Rouges", "cost": 12, "url": "https://www.paris.fr/lieux/marche-des-enfants-rouges-1799", "time": "morning" },
-                { "budget": "high", "name": "Le Food Market", "cost": 20, "url": "https://www.lefoodmarket.fr/", "time": "evening" }
+                { "budget": "low", "name": "Chez Alain Miam Miam", "cost": 10, "url": "https://www.paris.fr/pages/chez-alain-miam-miam-2415", "time": "afternoon", "interest": "art" },
+                { "budget": "medium", "name": "Marché des Enfants Rouges", "cost": 12, "url": "https://www.paris.fr/lieux/marche-des-enfants-rouges-1799", "time": "morning", "interest": "art" },
+                { "budget": "high", "name": "Le Food Market", "cost": 20, "url": "https://www.lefoodmarket.fr/", "time": "evening", "interest": "art" }
               ]
             },
             "activities": {
@@ -333,50 +354,55 @@
             "recommendations": {
               "low": {
                 "activities": [
-                  { "name": "Walk along the Seine", "cost": 0, "url": "https://www.paris.fr/lieux/quais-de-seine-1798" },
-                  { "name": "Picnic at Luxembourg Gardens", "cost": 5, "url": "https://www.paris.fr/lieux/jardin-du-luxembourg-1807" },
-                  { "name": "Visit Montmartre", "cost": 0, "url": "https://www.paris.fr/lieux/montmartre-1800" }
+                  { "name": "Walk along the Seine", "cost": 0, "url": "https://www.paris.fr/lieux/quais-de-seine-1798", "interest": "art", "time": "morning" },
+                  { "name": "Picnic at Luxembourg Gardens", "cost": 5, "url": "https://www.paris.fr/lieux/jardin-du-luxembourg-1807", "interest": "nature", "time": "afternoon" },
+                  { "name": "Visit Montmartre", "cost": 0, "url": "https://www.paris.fr/lieux/montmartre-1800", "interest": "history", "time": "evening" },
+                  { "name": "Jardin d’Acclimatation", "cost": 5, "url": "https://www.jardindacclimatation.fr/en", "interest": "kids", "time": "afternoon" }
                 ],
                 "restaurants": [
-                  { "name": "Chez Gladines", "cost": 15, "url": "https://www.chezgladines.fr/", "type": "French" },
-                  { "name": "Chez Alain Miam Miam", "cost": 10, "url": "https://www.paris.fr/pages/chez-alain-miam-miam-2415", "type": "Local Street Food" },
-                  { "name": "McDonald’s", "cost": 10, "url": "https://www.mcdonalds.fr/", "type": "Fast Food" }
+                  { "name": "Chez Gladines", "cost": 15, "url": "https://www.chezgladines.fr/", "type": "French", "interest": "history", "time": "afternoon" },
+                  { "name": "Chez Alain Miam Miam", "cost": 10, "url": "https://www.paris.fr/pages/chez-alain-miam-miam-2415", "type": "Local Street Food", "interest": "art", "time": "afternoon" },
+                  { "name": "McDonald’s", "cost": 10, "url": "https://www.mcdonalds.fr/", "type": "Fast Food", "interest": "kids", "time": "afternoon" }
                 ]
               },
               "medium": {
                 "activities": [
-                  { "name": "Seine River Cruise", "cost": 15, "url": "https://www.bateauxparisiens.com/en/" },
-                  { "name": "Musée Rodin", "cost": 12, "url": "https://www.musee-rodin.fr/en" },
-                  { "name": "Sainte-Chapelle", "cost": 11.5, "url": "https://www.sainte-chapelle.fr/en/" }
+                  { "name": "Seine River Cruise", "cost": 15, "url": "https://www.bateauxparisiens.com/en/", "interest": "adventure", "time": "evening" },
+                  { "name": "Musée Rodin", "cost": 12, "url": "https://www.musee-rodin.fr/en", "interest": "art", "time": "morning" },
+                  { "name": "Sainte-Chapelle", "cost": 11.5, "url": "https://www.sainte-chapelle.fr/en/", "interest": "history", "time": "morning" },
+                  { "name": "Parc de la Villette - Cité des Enfants", "cost": 12, "url": "https://www.cite-sciences.fr/en/children", "interest": "kids", "time": "morning" }
                 ],
                 "restaurants": [
-                  { "name": "Le Potager de Charlotte", "cost": 30, "url": "https://www.lepotagerdecharlotte.fr/en/", "type": "Vegan" },
-                  { "name": "Pizzeria Popolare", "cost": 25, "url": "https://www.bigmammagroup.com/en/trattorias/pizzeria-popolare", "type": "Italian" },
-                  { "name": "Miss Kô", "cost": 40, "url": "https://www.miss-ko.com/", "type": "Asian" }
+                  { "name": "Le Potager de Charlotte", "cost": 30, "url": "https://www.lepotagerdecharlotte.fr/en/", "type": "Vegan", "interest": "nature", "time": "evening" },
+                  { "name": "Pizzeria Popolare", "cost": 25, "url": "https://www.bigmammagroup.com/en/trattorias/pizzeria-popolare", "type": "Italian", "interest": "shopping", "time": "evening" },
+                  { "name": "Miss Kô", "cost": 40, "url": "https://www.miss-ko.com/", "type": "Asian", "interest": "adventure", "time": "evening" }
                 ]
               },
               "high": {
                 "activities": [
-                  { "name": "Eiffel Tower Summit", "cost": 26, "url": "https://www.toureiffel.paris/en" },
-                  { "name": "Palace of Versailles", "cost": 19.5, "url": "https://en.chateauversailles.fr/" },
-                  { "name": "Lido de Paris Cabaret Show", "cost": 85, "url": "https://www.lido.fr/en/" }
+                  { "name": "Eiffel Tower Summit", "cost": 26, "url": "https://www.toureiffel.paris/en", "interest": "adventure", "time": "afternoon" },
+                  { "name": "Palace of Versailles", "cost": 19.5, "url": "https://en.chateauversailles.fr/", "interest": "history", "time": "afternoon" },
+                  { "name": "Lido de Paris Cabaret Show", "cost": 85, "url": "https://www.lido.fr/en/", "interest": "adventure", "time": "evening" },
+                  { "name": "Disneyland Paris", "cost": 60, "url": "https://www.disneylandparis.com/en-us/", "interest": "kids", "time": "afternoon" }
                 ],
                 "restaurants": [
-                  { "name": "Le Jules Verne", "cost": 150, "url": "https://www.restaurants-toureiffel.com/en/le-jules-verne.html", "type": "French" },
-                  { "name": "Shang Palace", "cost": 80, "url": "https://www.shangri-la.com/paris/shangrila/dining/restaurants/shang-palace/", "type": "Asian" },
-                  { "name": "Gentle Gourmet", "cost": 60, "url": "https://www.gentlegourmet.fr/", "type": "Vegan" }
+                  { "name": "Le Jules Verne", "cost": 150, "url": "https://www.restaurants-toureiffel.com/en/le-jules-verne.html", "type": "French", "interest": "adventure", "time": "evening" },
+                  { "name": "Shang Palace", "cost": 80, "url": "https://www.shangri-la.com/paris/shangrila/dining/restaurants/shang-palace/", "type": "Asian", "interest": "adventure", "time": "evening" },
+                  { "name": "Gentle Gourmet", "cost": 60, "url": "https://www.gentlegourmet.fr/", "type": "Vegan", "interest": "nature", "time": "evening" }
                 ]
               }
             },
             "premiumExtras": {
               "secondaryActivities": [
-                { "name": "Visit the Latin Quarter", "cost": 0, "url": "https://www.paris.fr/lieux/quartier-latin-1804", "time": "afternoon" },
-                { "name": "Explore Île de la Cité", "cost": 0, "url": "https://www.paris.fr/lieux/ile-de-la-cite-1805", "time": "morning" }
+                { "name": "Visit the Latin Quarter", "cost": 0, "url": "https://www.paris.fr/lieux/quartier-latin-1804", "time": "afternoon", "interest": "history" },
+                { "name": "Explore Île de la Cité", "cost": 0, "url": "https://www.paris.fr/lieux/ile-de-la-cite-1805", "time": "morning", "interest": "history" },
+                { "name": "Puppet Show at Luxembourg Gardens", "cost": 6, "url": "https://www.paris.fr/lieux/jardin-du-luxembourg-1807", "time": "afternoon", "interest": "kids" }
               ],
               "localTips": [
                 "Visit the Eiffel Tower early in the morning to avoid crowds.",
                 "Try a hidden gem: the Canal Saint-Martin for a scenic walk and local cafes.",
-                "The best time to visit the Louvre is on Wednesday or Friday evening when it’s open late and less crowded."
+                "The best time to visit the Louvre is on Wednesday or Friday evening when it’s open late and less crowded.",
+                "For kids, the Jardin d’Acclimatation has a petting zoo that’s a hidden delight!"
               ]
             }
           }
@@ -407,6 +433,30 @@
       }
     });
 
+    // Function to find the cheapest option within budget
+    function findCheapestOption(options, budgetLimit, persons, timeOfDay, interest, type) {
+      const budgetLimitPerPerson = budgetLimit / persons;
+      let cheapestOption = null;
+      let lowestCost = Infinity;
+
+      options.forEach(option => {
+        const costPerPerson = option.cost;
+        if (costPerPerson <= budgetLimitPerPerson && costPerPerson < lowestCost) {
+          if (type === "activity" || type === "restaurant") {
+            if (option.time === timeOfDay && (!interest || option.interest === interest)) {
+              lowestCost = costPerPerson;
+              cheapestOption = option;
+            }
+          } else {
+            lowestCost = costPerPerson;
+            cheapestOption = option;
+          }
+        }
+      });
+
+      return cheapestOption || options[0]; // Fallback to first option if none fit
+    }
+
     // Form submission logic
     document.getElementById('travelForm').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -422,7 +472,8 @@
       const timeOfDay = form.timeOfDay.value || "morning"; // Default to "morning"
       const code = form.code.value.trim();
       const previewPremium = form.previewPremium.checked;
-      const isPremium = code === 'TRAVEL2025' || previewPremium;
+      let isPremium = code === 'TRAVEL2025' || previewPremium;
+      let rearrangeBudget = false;
 
       // Validate required inputs
       if (!country || !city || !travelData[country] || !travelData[country].cities[city]) {
@@ -441,6 +492,7 @@
       const cityData = travelData[country].cities[city];
       let itinerary = `<h2>Your ${city} 1-Day Free Itinerary (${persons} Person${persons > 1 ? 's' : ''})</h2>`;
       let totalCost = 0;
+      let transportOption, activity, restaurant;
 
       // Convert costs to selected currency
       const convertCost = (cost) => {
@@ -449,8 +501,8 @@
         return Math.round(costInSelectedCurrency * 100) / 100;
       };
 
-      // Day 1 (free tier is limited to 1 day)
-      const transportOption = cityData.transport[transport];
+      // Initial selection
+      transportOption = cityData.transport[transport];
       const altTransportOptions = Object.keys(cityData.transport).filter(t => t !== transport);
       const altTransport = altTransportOptions.length > 0 ? altTransportOptions[0] : transport;
       const altTransportOption = cityData.transport[altTransport];
@@ -459,24 +511,24 @@
       const activities = cityData.activities[interests].filter(activity => 
         activity.time === timeOfDay
       );
-      const activity = activities.length > 0 ? activities[0] : cityData.activities[interests][0];
+      activity = activities.length > 0 ? activities[0] : cityData.activities[interests][0];
 
       // Filter restaurants based on budget and time of day
       const restaurants = cityData.restaurants[food].filter(restaurant => 
         restaurant.budget === budget &&
         restaurant.time === timeOfDay
       );
-      const restaurant = restaurants.length > 0 ? restaurants[0] : cityData.restaurants[food].find(r => r.budget === budget) || cityData.restaurants[food][0];
+      restaurant = restaurants.length > 0 ? restaurants[0] : cityData.restaurants[food].find(r => r.budget === budget) || cityData.restaurants[food][0];
 
-      // Calculate costs based on number of persons
-      const transportCostPerPerson = convertCost(transportOption.cost);
-      const transportCostTotal = convertCost(transportOption.cost * persons);
-      const activityCostPerPerson = convertCost(activity.cost);
-      const activityCostTotal = convertCost(activity.cost * persons);
-      const restaurantCostPerPerson = convertCost(restaurant.cost);
-      const restaurantCostTotal = convertCost(restaurant.cost * persons);
+      // Calculate initial costs based on number of persons
+      let transportCostPerPerson = convertCost(transportOption.cost);
+      let transportCostTotal = convertCost(transportOption.cost * persons);
+      let activityCostPerPerson = convertCost(activity.cost);
+      let activityCostTotal = convertCost(activity.cost * persons);
+      let restaurantCostPerPerson = convertCost(restaurant.cost);
+      let restaurantCostTotal = convertCost(restaurant.cost * persons);
       totalCost = transportCostTotal + activityCostTotal + restaurantCostTotal;
-      const totalCostPerPerson = totalCost / persons;
+      let totalCostPerPerson = totalCost / persons;
 
       // Check budget constraints (per person budget)
       let budgetLimit;
@@ -485,8 +537,13 @@
         case "medium": budgetLimit = 150; break;
         case "high": budgetLimit = Infinity; break;
       }
+
+      // If budget is exceeded, offer to rearrange
       if (totalCostPerPerson > budgetLimit) {
-        itinerary += `<p class="error">Warning: Total cost per person ($${totalCostPerPerson.toFixed(2)} ${currency}) exceeds your budget range. Consider adjusting your preferences.</p>`;
+        itinerary += `<div class="budget-warning">`;
+        itinerary += `<p>Warning: Total cost per person ($${totalCostPerPerson.toFixed(2)} ${currency}) exceeds your budget range of $${budgetLimit.toFixed(2)} ${currency}.</p>`;
+        itinerary += `<button onclick="rearrangeItinerary('${country}', '${city}', '${interests}', '${transport}', '${food}', '${budget}', '${currency}', ${persons}, '${timeOfDay}', ${isPremium})">Rearrange to Fit Budget</button>`;
+        itinerary += `</div>`;
       }
 
       itinerary += `<h3>Day 1 (Time of Day: ${timeOfDay.charAt(0).toUpperCase() + timeOfDay.slice(1)})</h3>`;
@@ -501,9 +558,9 @@
         itinerary += `<h3>Premium Extras</h3>`;
         itinerary += `<p><strong>Secondary Activity Suggestion:</strong></p>`;
         const secondaryActivities = cityData.premiumExtras.secondaryActivities.filter(activity => 
-          activity.time === timeOfDay
+          activity.time === timeOfDay && activity.interest === interests
         );
-        const secondaryActivity = secondaryActivities.length > 0 ? secondaryActivities[0] : cityData.premiumExtras.secondaryActivities[0];
+        const secondaryActivity = secondaryActivities.length > 0 ? secondaryActivities[0] : cityData.premiumExtras.secondaryActivities.find(a => a.interest === interests) || cityData.premiumExtras.secondaryActivities[0];
         itinerary += `<p>- ${secondaryActivity.name} ($${convertCost(secondaryActivity.cost).toFixed(2)} ${currency} per person, $${convertCost(secondaryActivity.cost * persons).toFixed(2)} ${currency} total, <a href="${secondaryActivity.url}" target="_blank">${secondaryActivity.url}</a>)</p>`;
 
         itinerary += `<div class="local-tip">`;
@@ -521,11 +578,128 @@
       itinerary += `<div class="recommendations ${isPremium ? '' : 'hidden'}">`;
       itinerary += `<h3>Popular Recommendations for Your Budget</h3>`;
       itinerary += `<p><strong>Activities:</strong></p>`;
-      recommendations.activities.forEach(activity => {
+      const filteredActivities = recommendations.activities.filter(activity => 
+        activity.time === timeOfDay && activity.interest === interests
+      );
+      const activitiesToShow = filteredActivities.length > 0 ? filteredActivities : recommendations.activities.filter(activity => activity.interest === interests);
+      activitiesToShow.forEach(activity => {
         itinerary += `<p>- ${activity.name} ($${convertCost(activity.cost).toFixed(2)} ${currency} per person, $${convertCost(activity.cost * persons).toFixed(2)} ${currency} total, <a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
       });
       itinerary += `<p><strong>Dining:</strong></p>`;
-      recommendations.restaurants.forEach(restaurant => {
+      const filteredRestaurants = recommendations.restaurants.filter(restaurant => 
+        restaurant.time === timeOfDay && restaurant.interest === interests
+      );
+      const restaurantsToShow = filteredRestaurants.length > 0 ? filteredRestaurants : recommendations.restaurants.filter(restaurant => restaurant.interest === interests);
+      restaurantsToShow.forEach(restaurant => {
+        itinerary += `<p>- ${restaurant.name} ($${convertCost(restaurant.cost).toFixed(2)} ${currency} per person, $${convertCost(restaurant.cost * persons).toFixed(2)} ${currency} total, <a href="${restaurant.url}" target="_blank">${restaurant.url}</a>, ${restaurant.type})</p>`;
+      });
+      itinerary += `</div>`;
+
+      if (!isPremium) {
+        itinerary += `<div class="recommendations">`;
+        itinerary += `<h3>Popular Recommendations for Your Budget</h3>`;
+        itinerary += `<p>Unlock personalized recommendations by subscribing to premium! Enter the code TRAVEL2025 to see more.</p>`;
+        itinerary += `</div>`;
+      }
+
+      document.getElementById('output').innerHTML = itinerary;
+    });
+
+    // Function to rearrange itinerary to fit budget
+    function rearrangeItinerary(country, city, interests, transport, food, budget, currency, persons, timeOfDay, isPremium) {
+      const cityData = travelData[country].cities[city];
+      let itinerary = `<h2>Your ${city} 1-Day Free Itinerary (${persons} Person${persons > 1 ? 's' : ''}) - Rearranged to Fit Budget</h2>`;
+      let totalCost = 0;
+
+      // Convert costs to selected currency
+      const convertCost = (cost) => {
+        const costInUSD = cost;
+        const costInSelectedCurrency = costInUSD * exchangeRates[currency];
+        return Math.round(costInSelectedCurrency * 100) / 100;
+      };
+
+      // Determine budget limit
+      let budgetLimit;
+      switch (budget) {
+        case "low": budgetLimit = 50; break;
+        case "medium": budgetLimit = 150; break;
+        case "high": budgetLimit = Infinity; break;
+      }
+      const remainingBudget = budgetLimit * persons;
+
+      // Find cheapest transport
+      const transportOptions = Object.values(cityData.transport);
+      let transportOption = findCheapestOption(transportOptions, remainingBudget, persons, timeOfDay, interests, "transport");
+      let transportCostPerPerson = convertCost(transportOption.cost);
+      let transportCostTotal = convertCost(transportOption.cost * persons);
+      let remainingAfterTransport = remainingBudget - transportCostTotal;
+
+      // Find cheapest activity
+      const activities = cityData.activities[interests];
+      let activity = findCheapestOption(activities, remainingAfterTransport, persons, timeOfDay, interests, "activity");
+      let activityCostPerPerson = convertCost(activity.cost);
+      let activityCostTotal = convertCost(activity.cost * persons);
+      let remainingAfterActivity = remainingAfterTransport - activityCostTotal;
+
+      // Find cheapest restaurant
+      const restaurants = cityData.restaurants[food];
+      let restaurant = findCheapestOption(restaurants, remainingAfterActivity, persons, timeOfDay, interests, "restaurant");
+      let restaurantCostPerPerson = convertCost(restaurant.cost);
+      let restaurantCostTotal = convertCost(restaurant.cost * persons);
+
+      // Recalculate total cost
+      totalCost = transportCostTotal + activityCostTotal + restaurantCostTotal;
+      const totalCostPerPerson = totalCost / persons;
+
+      const altTransportOptions = Object.keys(cityData.transport).filter(t => t !== transportOption);
+      const altTransport = altTransportOptions.length > 0 ? altTransportOptions[0] : transportOption;
+      const altTransportOption = cityData.transport[altTransport];
+
+      itinerary += `<h3>Day 1 (Time of Day: ${timeOfDay.charAt(0).toUpperCase() + timeOfDay.slice(1)})</h3>`;
+      itinerary += `<p><strong>Transport:</strong> ${transport} ($${transportCostPerPerson.toFixed(2)} ${currency} per person, $${transportCostTotal.toFixed(2)} ${currency} total, <a href="${transportOption.url}" target="_blank">${transportOption.url}</a>)</p>`;
+      if (isPremium) itinerary += `<p><strong>Alternative Transport:</strong> ${altTransport} ($${convertCost(altTransportOption.cost).toFixed(2)} ${currency} per person, $${convertCost(altTransportOption.cost * persons).toFixed(2)} ${currency} total, <a href="${altTransportOption.url}" target="_blank">${altTransportOption.url}</a>)</p>`;
+      itinerary += `<p><strong>Activity:</strong> ${activity.name} ($${activityCostPerPerson.toFixed(2)} ${currency} per person, $${activityCostTotal.toFixed(2)} ${currency} total, <a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
+      itinerary += `<p><strong>Meal:</strong> ${restaurant.name} ($${restaurantCostPerPerson.toFixed(2)} ${currency} per person, $${restaurantCostTotal.toFixed(2)} ${currency} total, <a href="${restaurant.url}" target="_blank">${restaurant.url}</a>)</p>`;
+      itinerary += `<p><strong>Total Estimated Cost:</strong> $${totalCost.toFixed(2)} ${currency} ($${totalCostPerPerson.toFixed(2)} ${currency} per person)</p>`;
+
+      // Premium Extras
+      if (isPremium) {
+        itinerary += `<h3>Premium Extras</h3>`;
+        itinerary += `<p><strong>Secondary Activity Suggestion:</strong></p>`;
+        const secondaryActivities = cityData.premiumExtras.secondaryActivities.filter(activity => 
+          activity.time === timeOfDay && activity.interest === interests
+        );
+        const secondaryActivity = secondaryActivities.length > 0 ? secondaryActivities[0] : cityData.premiumExtras.secondaryActivities.find(a => a.interest === interests) || cityData.premiumExtras.secondaryActivities[0];
+        itinerary += `<p>- ${secondaryActivity.name} ($${convertCost(secondaryActivity.cost).toFixed(2)} ${currency} per person, $${convertCost(secondaryActivity.cost * persons).toFixed(2)} ${currency} total, <a href="${secondaryActivity.url}" target="_blank">${secondaryActivity.url}</a>)</p>`;
+
+        itinerary += `<div class="local-tip">`;
+        itinerary += `<h3>Local Tips</h3>`;
+        cityData.premiumExtras.localTips.forEach(tip => {
+          itinerary += `<p>- ${tip}</p>`;
+        });
+        itinerary += `</div>`;
+      }
+
+      itinerary += `<p class="upgrade">Upgrade to Premium (code: TRAVEL2025) for your full trip plan! <span id="paypal-button-placeholder">[PayPal Button Placeholder]</span></p>`;
+
+      // Add Recommendations/Popular Section (Hidden for Free Tier)
+      const recommendations = cityData.recommendations[budget];
+      itinerary += `<div class="recommendations ${isPremium ? '' : 'hidden'}">`;
+      itinerary += `<h3>Popular Recommendations for Your Budget</h3>`;
+      itinerary += `<p><strong>Activities:</strong></p>`;
+      const filteredActivities = recommendations.activities.filter(activity => 
+        activity.time === timeOfDay && activity.interest === interests
+      );
+      const activitiesToShow = filteredActivities.length > 0 ? filteredActivities : recommendations.activities.filter(activity => activity.interest === interests);
+      activitiesToShow.forEach(activity => {
+        itinerary += `<p>- ${activity.name} ($${convertCost(activity.cost).toFixed(2)} ${currency} per person, $${convertCost(activity.cost * persons).toFixed(2)} ${currency} total, <a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
+      });
+      itinerary += `<p><strong>Dining:</strong></p>`;
+      const filteredRestaurants = recommendations.restaurants.filter(restaurant => 
+        restaurant.time === timeOfDay && restaurant.interest === interests
+      );
+      const restaurantsToShow = filteredRestaurants.length > 0 ? filteredRestaurants : recommendations.restaurants.filter(restaurant => restaurant.interest === interests);
+      restaurantsToShow.forEach(restaurant => {
         itinerary += `<p>- ${restaurant.name} ($${convertCost(restaurant.cost).toFixed(2)} ${currency} per person, $${convertCost(restaurant.cost * persons).toFixed(2)} ${currency} total, <a href="${restaurant.url}" target="_blank">${restaurant.url}</a>, ${restaurant.type})</p>`;
       });
       itinerary += `</div>`;
