@@ -67,6 +67,12 @@
       font-style: italic;
       text-align: center;
     }
+    .recommendations {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+    }
     a {
       color: #007bff;
       text-decoration: none;
@@ -96,37 +102,68 @@
 <body>
   <div class="container">
     <h1>Travel Itinerary Builder</h1>
-    <p>Choose your preferences to get a 1-day free itinerary. Upgrade to premium for your full trip!</p>
+    <p>Choose your preferences to get a 1-day free itinerary for Paris, France. Upgrade to premium for more options!</p>
     <form id="travelForm">
       <select name="country" id="countrySelect" required>
         <option value="" disabled selected>Select Country</option>
         <option value="France">France</option>
-        <option value="Spain">Spain</option>
-        <option value="United States">United States</option>
-        <option value="China">China</option>
-        <option value="Italy">Italy</option>
-        <option value="Turkey">Turkey</option>
-        <option value="Mexico">Mexico</option>
-        <option value="Thailand">Thailand</option>
-        <option value="Germany">Germany</option>
-        <option value="United Kingdom">United Kingdom</option>
-        <option value="Japan">Japan</option>
-        <option value="Austria">Austria</option>
-        <option value="Greece">Greece</option>
-        <option value="Malaysia">Malaysia</option>
-        <option value="Portugal">Portugal</option>
-        <option value="Canada">Canada</option>
-        <option value="Netherlands">Netherlands</option>
-        <option value="Singapore">Singapore</option>
-        <option value="Indonesia">Indonesia</option>
-        <option value="South Korea">South Korea</option>
       </select>
       <select name="city" id="citySelect" required>
         <option value="" disabled selected>Select City</option>
       </select>
-      <input type="text" name="interests" placeholder="Interests (e.g., art, history, nature)" required>
-      <input type="text" name="transport" placeholder="Transport (e.g., metro, taxi)" required>
-      <input type="text" name="food" placeholder="Food (e.g., French, Vegan, Italian)" required>
+      <select name="interests" required>
+        <option value="" disabled selected>Select Interest</option>
+        <option value="art">Art</option>
+        <option value="history">History</option>
+        <option value="nature">Nature</option>
+        <option value="adventure">Adventure</option>
+        <option value="shopping">Shopping</option>
+      </select>
+      <select name="transport" required>
+        <option value="" disabled selected>Select Transport</option>
+        <option value="metro">Metro</option>
+        <option value="taxi">Taxi</option>
+        <option value="train">Train</option>
+        <option value="tramway">Tramway</option>
+      </select>
+      <select name="food" required>
+        <option value="" disabled selected>Select Food</option>
+        <option value="French">French</option>
+        <option value="Vegan">Vegan</option>
+        <option value="Italian">Italian</option>
+        <option value="Asian">Asian</option>
+        <option value="Fast Food">Fast Food</option>
+        <option value="Local Street Food">Local Street Food</option>
+      </select>
+      <select name="budget" required>
+        <option value="" disabled selected>Select Budget Range (per person)</option>
+        <option value="low">Low ($0-50)</option>
+        <option value="medium">Medium ($51-150)</option>
+        <option value="high">High ($151+)</option>
+      </select>
+      <select name="currency" required>
+        <option value="" disabled selected>Select Currency</option>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+      </select>
+      <select name="travelStyle" required>
+        <option value="" disabled selected>Select Travel Style</option>
+        <option value="solo">Solo</option>
+        <option value="couple">Couple</option>
+        <option value="family">Family</option>
+        <option value="group">Group</option>
+      </select>
+      <select name="timeOfDay" required>
+        <option value="" disabled selected>Select Time of Day Preference</option>
+        <option value="morning">Morning</option>
+        <option value="afternoon">Afternoon</option>
+        <option value="evening">Evening</option>
+      </select>
+      <select name="accessibility" required>
+        <option value="" disabled selected>Accessibility Needs?</option>
+        <option value="no">No</option>
+        <option value="yes">Yes (Wheelchair Accessible)</option>
+      </select>
       <input type="text" name="code" placeholder="Premium Code (optional)">
       <button type="submit">Generate Itinerary</button>
     </form>
@@ -134,137 +171,250 @@
   </div>
 
   <script>
-    // Static JSON data for 20 countries, each with 10 cities
+    // Static JSON data for France (Paris only)
     const travelData = {
       "France": {
         "cities": {
           "Paris": {
             "transport": {
-              "metro": { "cost": 2.3, "url": "https://www.ratp.fr/en" },
-              "taxi": { "cost": 16, "url": "https://www.paris.fr/en/pages/taxis-2415" }
+              "metro": { "cost": 2.3, "url": "https://www.ratp.fr/en", "accessibility": true },
+              "taxi": { "cost": 16, "url": "https://www.paris.fr/en/pages/taxis-2415", "accessibility": true },
+              "train": { "cost": 3.5, "url": "https://www.sncf.com/en", "accessibility": true },
+              "tramway": { "cost": 2.3, "url": "https://www.ratp.fr/en", "accessibility": true }
             },
             "restaurants": {
-              "French": [{ "name": "Le Jules Verne", "cost": 150, "url": "https://www.restaurants-toureiffel.com/en/le-jules-verne.html" }],
-              "Vegan": [{ "name": "Le Potager de Charlotte", "cost": 30, "url": "https://www.lepotagerdecharlotte.fr/en/" }],
-              "Italian": [{ "name": "Pizzeria Popolare", "cost": 25, "url": "https://www.bigmammagroup.com/en/trattorias/pizzeria-popolare" }],
-              "Asian": [{ "name": "Shang Palace", "cost": 80, "url": "https://www.shangri-la.com/paris/shangrila/dining/restaurants/shang-palace/" }],
-              "Fast Food": [{ "name": "Five Guys", "cost": 15, "url": "https://www.fiveguys.fr/" }],
-              "Local Street Food": [{ "name": "Chez Alain Miam Miam", "cost": 10, "url": "https://www.paris.fr/pages/chez-alain-miam-miam-2415" }]
+              "French": [
+                { "name": "Le Jules Verne", "cost": 150, "url": "https://www.restaurants-toureiffel.com/en/le-jules-verne.html", "style": "couple", "time": "evening", "accessibility": true },
+                { "name": "Brasserie Lipp", "cost": 50, "url": "https://www.brasserielipp.fr/en/", "style": "group", "time": "afternoon", "accessibility": true }
+              ],
+              "Vegan": [
+                { "name": "Le Potager de Charlotte", "cost": 30, "url": "https://www.lepotagerdecharlotte.fr/en/", "style": "solo", "time": "afternoon", "accessibility": true },
+                { "name": "Gentle Gourmet", "cost": 40, "url": "https://www.gentlegourmet.fr/", "style": "family", "time": "evening", "accessibility": true }
+              ],
+              "Italian": [
+                { "name": "Pizzeria Popolare", "cost": 25, "url": "https://www.bigmammagroup.com/en/trattorias/pizzeria-popolare", "style": "group", "time": "evening", "accessibility": true },
+                { "name": "Il Vicolo", "cost": 35, "url": "https://www.ilvicolo-paris.fr/", "style": "couple", "time": "afternoon", "accessibility": true }
+              ],
+              "Asian": [
+                { "name": "Shang Palace", "cost": 80, "url": "https://www.shangri-la.com/paris/shangrila/dining/restaurants/shang-palace/", "style": "couple", "time": "evening", "accessibility": true },
+                { "name": "Kodawari Ramen", "cost": 20, "url": "https://www.kodawari-ramen.com/", "style": "solo", "time": "afternoon", "accessibility": true }
+              ],
+              "Fast Food": [
+                { "name": "Five Guys", "cost": 15, "url": "https://www.fiveguys.fr/", "style": "family", "time": "afternoon", "accessibility": true },
+                { "name": "McDonald’s", "cost": 10, "url": "https://www.mcdonalds.fr/", "style": "group", "time": "evening", "accessibility": true }
+              ],
+              "Local Street Food": [
+                { "name": "Chez Alain Miam Miam", "cost": 10, "url": "https://www.paris.fr/pages/chez-alain-miam-miam-2415", "style": "solo", "time": "afternoon", "accessibility": true },
+                { "name": "Marché des Enfants Rouges", "cost": 12, "url": "https://www.paris.fr/lieux/marche-des-enfants-rouges-1799", "style": "group", "time": "morning", "accessibility": true }
+              ]
             },
             "activities": {
-              "art": [{ "name": "Louvre Museum", "cost": 20, "url": "https://www.louvre.fr/en" }],
-              "history": [{ "name": "Notre-Dame Cathedral", "cost": 0, "url": "https://www.notredamedeparis.fr/en/" }],
-              "nature": [{ "name": "Jardin des Tuileries", "cost": 0, "url": "https://www.paris.fr/lieux/jardin-des-tuileries-1795" }],
-              "adventure": [{ "name": "Seine River Cruise", "cost": 15, "url": "https://www.bateauxparisiens.com/en/" }],
-              "shopping": [{ "name": "Galeries Lafayette", "cost": 0, "url": "https://www.galerieslafayette.com/en/" }]
+              "art": [
+                { "name": "Louvre Museum", "cost": 20, "url": "https://www.louvre.fr/en", "style": "solo", "time": "morning", "accessibility": true },
+                { "name": "Musée d’Orsay", "cost": 14, "url": "https://www.musee-orsay.fr/en", "style": "couple", "time": "afternoon", "accessibility": true }
+              ],
+              "history": [
+                { "name": "Notre-Dame Cathedral", "cost": 0, "url": "https://www.notredamedeparis.fr/en/", "style": "family", "time": "morning", "accessibility": true },
+                { "name": "Palace of Versailles", "cost": 19.5, "url": "https://en.chateauversailles.fr/", "style": "group", "time": "afternoon", "accessibility": true }
+              ],
+              "nature": [
+                { "name": "Jardin des Tuileries", "cost": 0, "url": "https://www.paris.fr/lieux/jardin-des-tuileries-1795", "style": "family", "time": "morning", "accessibility": true },
+                { "name": "Bois de Boulogne", "cost": 0, "url": "https://www.paris.fr/lieux/bois-de-boulogne-2468", "style": "group", "time": "afternoon", "accessibility": true }
+              ],
+              "adventure": [
+                { "name": "Seine River Cruise", "cost": 15, "url": "https://www.bateauxparisiens.com/en/", "style": "couple", "time": "evening", "accessibility": true },
+                { "name": "Eiffel Tower Summit", "cost": 26, "url": "https://www.toureiffel.paris/en", "style": "group", "time": "afternoon", "accessibility": true }
+              ],
+              "shopping": [
+                { "name": "Galeries Lafayette", "cost": 0, "url": "https://www.galerieslafayette.com/en/", "style": "solo", "time": "afternoon", "accessibility": true },
+                { "name": "Champs-Élysées", "cost": 0, "url": "https://www.paris.fr/lieux/avenue-des-champs-elysees-1793", "style": "group", "time": "evening", "accessibility": true }
+              ]
+            },
+            "recommendations": {
+              "low": {
+                "activities": [
+                  { "name": "Walk along the Seine", "cost": 0, "url": "https://www.paris.fr/lieux/quais-de-seine-1798" },
+                  { "name": "Picnic at Luxembourg Gardens", "cost": 5, "url": "https://www.paris.fr/lieux/jardin-du-luxembourg-1807" }
+                ],
+                "restaurants": [
+                  { "name": "Chez Gladines", "cost": 15, "url": "https://www.chezgladines.fr/", "type": "French" },
+                  { "name": "Marché des Enfants Rouges Stalls", "cost": 12, "url": "https://www.paris.fr/lieux/marche-des-enfants-rouges-1799", "type": "Local Street Food" }
+                ]
+              },
+              "medium": {
+                "activities": [
+                  { "name": "Seine River Cruise", "cost": 15, "url": "https://www.bateauxparisiens.com/en/" },
+                  { "name": "Musée Rodin", "cost": 12, "url": "https://www.musee-rodin.fr/en" }
+                ],
+                "restaurants": [
+                  { "name": "Le Potager de Charlotte", "cost": 30, "url": "https://www.lepotagerdecharlotte.fr/en/", "type": "Vegan" },
+                  { "name": "Pizzeria Popolare", "cost": 25, "url": "https://www.bigmammagroup.com/en/trattorias/pizzeria-popolare", "type": "Italian" }
+                ]
+              },
+              "high": {
+                "activities": [
+                  { "name": "Eiffel Tower Summit", "cost": 26, "url": "https://www.toureiffel.paris/en" },
+                  { "name": "Palace of Versailles", "cost": 19.5, "url": "https://en.chateauversailles.fr/" }
+                ],
+                "restaurants": [
+                  { "name": "Le Jules Verne", "cost": 150, "url": "https://www.restaurants-toureiffel.com/en/le-jules-verne.html", "type": "French" },
+                  { "name": "Shang Palace", "cost": 80, "url": "https://www.shangri-la.com/paris/shangrila/dining/restaurants/shang-palace/", "type": "Asian" }
+                ]
+              }
             }
-          },
-          "Lyon": {
-            "transport": {
-              "metro": { "cost": 2.3, "url": "https://www.tcl.fr/en" },
-              "taxi": { "cost": 15, "url": "https://www.lyon.fr/en/transport/taxis" }
-            },
-            "restaurants": {
-              "French": [{ "name": "Les Lyonnais", "cost": 40, "url": "https://www.leslyonnais.com/en/" }],
-              "Vegan": [{ "name": "Laska", "cost": 25, "url": "https://www.laska-lyon.fr/" }],
-              "Italian": [{ "name": "Casa Nobile", "cost": 30, "url": "https://www.casanobile.fr/" }],
-              "Asian": [{ "name": "Le Gourmet de Sèze", "cost": 35, "url": "https://www.lesgourmetsdeseze.fr/" }],
-              "Fast Food": [{ "name": "Burger King", "cost": 10, "url": "https://www.burgerking.fr/" }],
-              "Local Street Food": [{ "name": "Les Halles de Lyon Street Stalls", "cost": 8, "url": "https://www.halles-de-lyon-paul-bocuse.com/en/" }]
-            },
-            "activities": {
-              "art": [{ "name": "Musée des Beaux-Arts", "cost": 8, "url": "https://www.mba-lyon.fr/en" }],
-              "history": [{ "name": "Basilica of Notre-Dame de Fourvière", "cost": 0, "url": "https://www.fourviere.org/en/" }],
-              "nature": [{ "name": "Parc de la Tête d’Or", "cost": 0, "url": "https://www.lyon.fr/en/park/parc-de-la-tete-dor" }],
-              "adventure": [{ "name": "Rhône River Kayaking", "cost": 20, "url": "https://www.lyon-kayak.com/en/" }],
-              "shopping": [{ "name": "Les Halles de Lyon", "cost": 0, "url": "https://www.halles-de-lyon-paul-bocuse.com/en/" }]
-            }
-          },
-          "Marseille": {
-            "transport": {
-              "metro": { "cost": 1.8, "url": "https://www.rtm.fr/en" },
-              "taxi": { "cost": 14, "url": "https://www.marseille-tourisme.com/en/plan-your-trip/transport/taxis/" }
-            },
-            "restaurants": {
-              "French": [{ "name": "Chez Fonfon", "cost": 50, "url": "https://www.chezfonfon.com/en/" }],
-              "Vegan": [{ "name": "Green Love", "cost": 20, "url": "https://www.greenlove.fr/" }],
-              "Italian": [{ "name": "Pizzeria La Bonne Mère", "cost": 25, "url": "https://www.pizzerialabonnemere.fr/" }],
-              "Asian": [{ "name": "Le Yen", "cost": 30, "url": "https://www.leyen.fr/" }],
-              "Fast Food": [{ "name": "McDonald’s", "cost": 10, "url": "https://www.mcdonalds.fr/" }],
-              "Local Street Food": [{ "name": "Panier Market Stalls", "cost": 8, "url": "https://www.marseille-tourisme.com/en/discover-marseille/markets/le-panier" }]
-            },
-            "activities": {
-              "art": [{ "name": "MuCEM", "cost": 11, "url": "https://www.mucem.org/en" }],
-              "history": [{ "name": "Basilique Notre-Dame de la Garde", "cost": 0, "url": "https://www.notredamedelagarde.com/en/" }],
-              "nature": [{ "name": "Calanques National Park", "cost": 0, "url": "https://www.calanques-parcnational.fr/en" }],
-              "adventure": [{ "name": "Boat Trip to Frioul Archipelago", "cost": 25, "url": "https://www.marseille-tourisme.com/en/plan-your-trip/sea-trips/" }],
-              "shopping": [{ "name": "Les Terrasses du Port", "cost": 0, "url": "https://www.lesterrassesduport.com/en/" }]
-            }
-          },
-          "Nice": {
-            "transport": {
-              "tram": { "cost": 1.5, "url": "https://www.lignesdazur.com/en" },
-              "taxi": { "cost": 12, "url": "https://www.nice.fr/en/transport/taxis" }
-            },
-            "restaurants": {
-              "French": [{ "name": "La Petite Maison", "cost": 60, "url": "https://www.lapetitemaison-nice.com/en/" }],
-              "Vegan": [{ "name": "Vegan Gorilla", "cost": 20, "url": "https://www.veganeating.com/vegan-gorilla-nice/" }],
-              "Italian": [{ "name": "La Voglia", "cost": 30, "url": "https://www.lavoglia.com/" }],
-              "Asian": [{ "name": "Le Dragon Bleu", "cost": 35, "url": "https://www.ledragonbleu.fr/" }],
-              "Fast Food": [{ "name": "Subway", "cost": 10, "url": "https://www.subway.com/fr-FR" }],
-              "Local Street Food": [{ "name": "Socca Stalls in Old Nice", "cost": 5, "url": "https://www.nice-tourism.com/en/nice-attractions/old-nice" }]
-            },
-            "activities": {
-              "art": [{ "name": "Matisse Museum", "cost": 10, "url": "https://www.musee-matisse-nice.org/en/" }],
-              "history": [{ "name": "Old Nice", "cost": 0, "url": "https://www.nice-tourism.com/en/nice-attractions/old-nice" }],
-              "nature": [{ "name": "Promenade des Anglais", "cost": 0, "url": "https://www.nice-tourism.com/en/nice-attractions/promenade-des-anglais" }],
-              "adventure": [{ "name": "Paragliding in Nice", "cost": 80, "url": "https://www.nice-paragliding.com/en/" }],
-              "shopping": [{ "name": "Avenue Jean Médecin", "cost": 0, "url": "https://www.nice-tourism.com/en/shopping/avenue-jean-medecin" }]
-            }
-          },
-          "Bordeaux": {
-            "transport": {
-              "tram": { "cost": 1.7, "url": "https://www.infotbm.com/en" },
-              "taxi": { "cost": 13, "url": "https://www.bordeaux-tourism.co.uk/plan-your-trip/getting-around/taxis" }
-            },
-            "restaurants": {
-              "French": [{ "name": "Le Chapon Fin", "cost": 70, "url": "https://www.chapon-fin.com/en/" }],
-              "Vegan": [{ "name": "Rest’O", "cost": 25, "url": "https://www.rest-o-bordeaux.com/" }],
-              "Italian": [{ "name": "Peppone", "cost": 30, "url": "https://www.peppone.fr/" }],
-              "Asian": [{ "name": "Sushi Shop", "cost": 20, "url": "https://www.sushishop.fr/" }],
-              "Fast Food": [{ "name": "KFC", "cost": 10, "url": "https://www.kfc.fr/" }],
-              "Local Street Food": [{ "name": "Marché des Capucins", "cost": 8, "url": "https://www.bordeaux-tourism.co.uk/discover-bordeaux/markets/marche-des-capucins" }]
-            },
-            "activities": {
-              "art": [{ "name": "CAPC Contemporary Art Museum", "cost": 7, "url": "https://www.capc-bordeaux.fr/en" }],
-              "history": [{ "name": "Place de la Bourse", "cost": 0, "url": "https://www.bordeaux-tourism.co.uk/discover-bordeaux/unesco-world-heritage/place-de-la-bourse" }],
-              "nature": [{ "name": "Jardin Public", "cost": 0, "url": "https://www.bordeaux-tourism.co.uk/discover-bordeaux/parks-and-gardens/jardin-public" }],
-              "adventure": [{ "name": "Wine Tasting Tour", "cost": 40, "url": "https://www.bordeaux-tourism.co.uk/plan-your-trip/wine-tours" }],
-              "shopping": [{ "name": "Rue Sainte-Catherine", "cost": 0, "url": "https://www.bordeaux-tourism.co.uk/shopping/rue-sainte-catherine" }]
-            }
-          },
-          "Toulouse": {
-            "transport": {
-              "metro": { "cost": 1.7, "url": "https://www.tisseo.fr/en" },
-              "taxi": { "cost": 12, "url": "https://www.toulouse-tourisme.com/practical/transport/taxis" }
-            },
-            "restaurants": {
-              "French": [{ "name": "Michel Sarran", "cost": 80, "url": "https://www.michel-sarran.com/en/" }],
-              "Vegan": [{ "name": "La Faim des Haricots", "cost": 20, "url": "https://www.lafaimdesharicots.fr/" }],
-              "Italian": [{ "name": "La Cantine de Candie", "cost": 25, "url": "https://www.lacantinedecandie.fr/" }],
-              "Asian": [{ "name": "Le Bol Rouge", "cost": 30, "url": "https://www.lebolrouge.fr/" }],
-              "Fast Food": [{ "name": "McDonald’s", "cost": 10, "url": "https://www.mcdonalds.fr/" }],
-              "Local Street Food": [{ "name": "Marché Victor Hugo Stalls", "cost": 8, "url": "https://www.toulouse-tourisme.com/marche-victor-hugo" }]
-            },
-            "activities": {
-              "art": [{ "name": "Les Abattoirs", "cost": 8, "url": "https://www.lesabattoirs.org/en" }],
-              "history": [{ "name": "Basilique Saint-Sernin", "cost": 0, "url": "https://www.toulouse-tourisme.com/basilique-saint-sernin" }],
-              "nature": [{ "name": "Jardin des Plantes", "cost": 0, "url": "https://www.toulouse-tourisme.com/jardin-des-plantes" }],
-              "adventure": [{ "name": "Canal du Midi Bike Tour", "cost": 15, "url": "https://www.toulouse-tourisme.com/activities/bike-tours" }],
-              "shopping": [{ "name": "Marché Victor Hugo", "cost": 0, "url": "https://www.toulouse-tourisme.com/marche-victor-hugo" }]
-            }
-          },
-          "Strasbourg": {
-            "transport": {
-              "tram": { "cost": 1.8, "url": "https://www.cts-strasbourg.eu/en/" },
-              "taxi": { "cost": 12
+          }
+        }
+      }
+    };
+
+    // Currency conversion rates (as of March 2025, approximate)
+    const exchangeRates = {
+      "USD": 1,
+      "EUR": 0.92 // 1 USD = 0.92 EUR
+    };
+
+    // Populate city dropdown based on selected country
+    document.getElementById('countrySelect').addEventListener('change', function() {
+      const country = this.value;
+      const citySelect = document.getElementById('citySelect');
+      citySelect.innerHTML = '<option value="" disabled selected>Select City</option>';
+
+      if (country && travelData[country]) {
+        const cities = Object.keys(travelData[country].cities);
+        cities.forEach(city => {
+          const option = document.createElement('option');
+          option.value = city;
+          option.textContent = city;
+          citySelect.appendChild(option);
+        });
+      }
+    });
+
+    // Form submission logic
+    document.getElementById('travelForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const country = form.country.value;
+      const city = form.city.value;
+      const interests = form.interests.value;
+      const transport = form.transport.value;
+      const food = form.food.value;
+      const budget = form.budget.value;
+      const currency = form.currency.value;
+      const travelStyle = form.travelStyle.value;
+      const timeOfDay = form.timeOfDay.value;
+      const accessibility = form.accessibility.value === "yes";
+      const code = form.code.value.trim();
+      const isPremium = code === 'TRAVEL2025';
+
+      // Validate inputs
+      if (!country || !city || !travelData[country] || !travelData[country].cities[city]) {
+        document.getElementById('output').innerHTML = '<p class="error">Please select a valid country and city.</p>';
+        return;
+      }
+      if (!interests) {
+        document.getElementById('output').innerHTML = '<p class="error">Please select your interests.</p>';
+        return;
+      }
+      if (!transport) {
+        document.getElementById('output').innerHTML = '<p class="error">Please select your preferred transport.</p>';
+        return;
+      }
+      if (!food) {
+        document.getElementById('output').innerHTML = '<p class="error">Please select your food preference.</p>';
+        return;
+      }
+      if (!budget) {
+        document.getElementById('output').innerHTML = '<p class="error">Please select your budget range.</p>';
+        return;
+      }
+      if (!currency) {
+        document.getElementById('output').innerHTML = '<p class="error">Please select your currency.</p>';
+        return;
+      }
+      if (!travelStyle) {
+        document.getElementById('output').innerHTML = '<p class="error">Please select your travel style.</p>';
+        return;
+      }
+      if (!timeOfDay) {
+        document.getElementById('output').innerHTML = '<p class="error">Please select your time of day preference.</p>';
+        return;
+      }
+
+      const cityData = travelData[country].cities[city];
+      let itinerary = `<h2>Your ${city} 1-Day Free Itinerary</h2>`;
+      let totalCost = 0;
+
+      // Convert costs to selected currency
+      const convertCost = (cost) => {
+        const costInUSD = cost;
+        const costInSelectedCurrency = costInUSD * exchangeRates[currency];
+        return Math.round(costInSelectedCurrency * 100) / 100;
+      };
+
+      // Day 1 (free tier is limited to 1 day)
+      const transportOption = cityData.transport[transport] || cityData.transport["metro"];
+      if (accessibility && !transportOption.accessibility) {
+        itinerary += `<p class="error">Note: ${transport} may not be wheelchair accessible. Consider alternative transport.</p>`;
+      }
+
+      const altTransportOptions = Object.keys(cityData.transport).filter(t => t !== transport);
+      const altTransport = altTransportOptions.length > 0 ? altTransportOptions[0] : transport;
+      const altTransportOption = cityData.transport[altTransport];
+
+      // Filter activities based on accessibility, travel style, and time of day
+      const activities = cityData.activities[interests].filter(activity => 
+        (!accessibility || activity.accessibility) &&
+        activity.style === travelStyle &&
+        activity.time === timeOfDay
+      );
+      const activity = activities.length > 0 ? activities[0] : cityData.activities[interests][0];
+
+      // Filter restaurants based on accessibility, travel style, and time of day
+      const restaurants = cityData.restaurants[food].filter(restaurant => 
+        (!accessibility || restaurant.accessibility) &&
+        restaurant.style === travelStyle &&
+        restaurant.time === timeOfDay
+      );
+      const restaurant = restaurants.length > 0 ? restaurants[0] : cityData.restaurants[food][0];
+
+      // Check budget constraints
+      totalCost = convertCost(transportOption.cost + activity.cost + restaurant.cost);
+      let budgetLimit;
+      switch (budget) {
+        case "low": budgetLimit = 50; break;
+        case "medium": budgetLimit = 150; break;
+        case "high": budgetLimit = Infinity; break;
+      }
+      if (totalCost > budgetLimit) {
+        itinerary += `<p class="error">Warning: Total cost ($${totalCost} ${currency}) exceeds your budget range. Consider adjusting your preferences.</p>`;
+      }
+
+      itinerary += `<h3>Day 1</h3>`;
+      itinerary += `<p><strong>Transport:</strong> ${transport} ($${convertCost(transportOption.cost)} ${currency}, <a href="${transportOption.url}" target="_blank">${transportOption.url}</a>)</p>`;
+      if (isPremium) itinerary += `<p><strong>Alternative Transport:</strong> ${altTransport} ($${convertCost(altTransportOption.cost)} ${currency}, <a href="${altTransportOption.url}" target="_blank">${altTransportOption.url}</a>)</p>`;
+      itinerary += `<p><strong>Activity:</strong> ${activity.name} ($${convertCost(activity.cost)} ${currency}, <a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
+      itinerary += `<p><strong>Meal:</strong> ${restaurant.name} ($${convertCost(restaurant.cost)} ${currency}, <a href="${restaurant.url}" target="_blank">${restaurant.url}</a>)</p>`;
+      itinerary += `<p><strong>Total Estimated Cost:</strong> $${totalCost} ${currency}</p>`;
+
+      itinerary += `<p class="upgrade">Upgrade to Premium (code: TRAVEL2025) for your full trip plan! <span id="paypal-button-placeholder">[PayPal Button Placeholder]</span></p>`;
+
+      // Add Recommendations/Popular Section based on budget
+      const recommendations = cityData.recommendations[budget];
+      itinerary += `<div class="recommendations">`;
+      itinerary += `<h3>Popular Recommendations for Your Budget</h3>`;
+      itinerary += `<p><strong>Activities:</strong></p>`;
+      recommendations.activities.forEach(activity => {
+        itinerary += `<p>- ${activity.name} ($${convertCost(activity.cost)} ${currency}, <a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
+      });
+      itinerary += `<p><strong>Dining:</strong></p>`;
+      recommendations.restaurants.forEach(restaurant => {
+        itinerary += `<p>- ${restaurant.name} ($${convertCost(restaurant.cost)} ${currency}, <a href="${restaurant.url}" target="_blank">${restaurant.url}</a>, ${restaurant.type})</p>`;
+      });
+      itinerary += `</div>`;
+
+      document.getElementById('output').innerHTML = itinerary;
+    });
+  </script>
+</body>
+</html>
