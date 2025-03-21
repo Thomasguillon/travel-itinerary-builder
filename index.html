@@ -12,7 +12,7 @@
     }
     body {
       font-family: Arial, sans-serif;
-      background: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2073&auto=format&fit=crop') no-repeat center center fixed;
+      background: url('https://images.unsplash.com/photo-1594643435935-eb2a4b3b7594?q=80&w=2070&auto=format&fit=crop') no-repeat center center fixed;
       background-size: cover;
       line-height: 1.6;
       color: #333;
@@ -25,7 +25,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5); /* Dark overlay for readability */
+      background: rgba(0, 0, 0, 0.4); /* Slightly lighter overlay for summer vibe */
       z-index: -1;
     }
     .container {
@@ -35,8 +35,17 @@
     }
     h1, h2, h3 {
       text-align: center;
-      color: #fff; /* Bright white for headings */
+      color: #fff; /* Bright white for main headings */
       margin-bottom: 20px;
+    }
+    h3.local-tips {
+      color: #ff6347; /* Tomato red for Local Tips */
+    }
+    h3.premium-extras {
+      color: #4682b4; /* Steel blue for Premium Extras */
+    }
+    h3.recommendations {
+      color: #32cd32; /* Lime green for Recommendations */
     }
     p.subtitle {
       text-align: center;
@@ -267,10 +276,10 @@
         "cities": {
           "Paris": {
             "transport": {
-              "metro": { "cost": 2.3, "url": "https://www.ratp.fr/en" },
-              "taxi": { "cost": 16, "url": "https://www.paris.fr/en/pages/taxis-2415" },
-              "train": { "cost": 3.5, "url": "https://www.sncf.com/en" },
-              "tramway": { "cost": 2.3, "url": "https://www.ratp.fr/en" }
+              "metro": { "cost": 2.3, "url": "https://www.ratp.fr/en", "details": { "time": "20 min", "stops": "Châtelet to Louvre-Rivoli", "station": "Louvre-Rivoli (Line 1)" } },
+              "taxi": { "cost": 16, "url": "https://www.paris.fr/en/pages/taxis-2415", "details": { "time": "15 min", "stops": "Direct from hotel to destination" } },
+              "train": { "cost": 3.5, "url": "https://www.sncf.com/en", "details": { "time": "30 min", "stops": "Gare du Nord to Saint-Michel Notre-Dame", "station": "Saint-Michel Notre-Dame (RER B)" } },
+              "tramway": { "cost": 2.3, "url": "https://www.ratp.fr/en", "details": { "time": "25 min", "stops": "Porte de Vincennes to Porte de la Chapelle", "station": "Porte de la Chapelle (T3b)" } }
             },
             "restaurants": {
               "French": [
@@ -413,9 +422,6 @@
       "EUR": 0.92 // 1 USD = 0.92 EUR
     };
 
-    // Since we’re only focusing on Paris, no need for dynamic city population
-    // Country and city are pre-selected and fixed
-
     // Function to find the cheapest option within budget
     function findCheapestOption(options, budgetLimit, persons, timeOfDay, interest, type) {
       const budgetLimitPerPerson = budgetLimit / persons;
@@ -529,15 +535,21 @@
       }
 
       itinerary += `<h3>Day 1 (Time of Day: ${timeOfDay.charAt(0).toUpperCase() + timeOfDay.slice(1)})</h3>`;
-      itinerary += `<p><strong>Transport:</strong> ${transport} ($${transportCostPerPerson.toFixed(2)} ${currency} per person, $${transportCostTotal.toFixed(2)} ${currency} total, <a href="${transportOption.url}" target="_blank">${transportOption.url}</a>)</p>`;
-      if (isPremium) itinerary += `<p><strong>Alternative Transport:</strong> ${altTransport} ($${convertCost(altTransportOption.cost).toFixed(2)} ${currency} per person, $${convertCost(altTransportOption.cost * persons).toFixed(2)} ${currency} total, <a href="${altTransportOption.url}" target="_blank">${altTransportOption.url}</a>)</p>`;
+      if (!isPremium) {
+        itinerary += `<p><strong>Transport:</strong> Detailed transport options (car, bus, train) including travel times and stops available with premium subscription!</p>`;
+      } else {
+        itinerary += `<p><strong>Transport Options:</strong></p>`;
+        itinerary += `<p>- Metro: $${convertCost(cityData.transport.metro.cost).toFixed(2)} ${currency} per person ($${convertCost(cityData.transport.metro.cost * persons).toFixed(2)} ${currency} total), Travel Time: ${cityData.transport.metro.details.time}, Stops: ${cityData.transport.metro.details.stops}, Station: ${cityData.transport.metro.details.station}, <a href="${cityData.transport.metro.url}" target="_blank">${cityData.transport.metro.url}</a></p>`;
+        itinerary += `<p>- Taxi: $${convertCost(cityData.transport.taxi.cost).toFixed(2)} ${currency} per person ($${convertCost(cityData.transport.taxi.cost * persons).toFixed(2)} ${currency} total), Travel Time: ${cityData.transport.taxi.details.time}, Stops: ${cityData.transport.taxi.details.stops}, <a href="${cityData.transport.taxi.url}" target="_blank">${cityData.transport.taxi.url}</a></p>`;
+        itinerary += `<p>- Train: $${convertCost(cityData.transport.train.cost).toFixed(2)} ${currency} per person ($${convertCost(cityData.transport.train.cost * persons).toFixed(2)} ${currency} total), Travel Time: ${cityData.transport.train.details.time}, Stops: ${cityData.transport.train.details.stops}, Station: ${cityData.transport.train.details.station}, <a href="${cityData.transport.train.url}" target="_blank">${cityData.transport.train.url}</a></p>`;
+      }
       itinerary += `<p><strong>Activity:</strong> ${activity.name} ($${activityCostPerPerson.toFixed(2)} ${currency} per person, $${activityCostTotal.toFixed(2)} ${currency} total, <a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
       itinerary += `<p><strong>Meal:</strong> ${restaurant.name} ($${restaurantCostPerPerson.toFixed(2)} ${currency} per person, $${restaurantCostTotal.toFixed(2)} ${currency} total, <a href="${restaurant.url}" target="_blank">${restaurant.url}</a>)</p>`;
       itinerary += `<p><strong>Total Estimated Cost:</strong> $${totalCost.toFixed(2)} ${currency} ($${totalCostPerPerson.toFixed(2)} ${currency} per person)</p>`;
 
       // Premium Extras
       if (isPremium) {
-        itinerary += `<h3>Premium Extras</h3>`;
+        itinerary += `<h3 class="premium-extras">Premium Extras</h3>`;
         itinerary += `<p><strong>Secondary Activity Suggestion:</strong></p>`;
         const secondaryActivities = cityData.premiumExtras.secondaryActivities.filter(activity => 
           activity.time === timeOfDay && activity.interest === interests
@@ -546,7 +558,7 @@
         itinerary += `<p>- ${secondaryActivity.name} ($${convertCost(secondaryActivity.cost).toFixed(2)} ${currency} per person, $${convertCost(secondaryActivity.cost * persons).toFixed(2)} ${currency} total, <a href="${secondaryActivity.url}" target="_blank">${secondaryActivity.url}</a>)</p>`;
 
         itinerary += `<div class="local-tip">`;
-        itinerary += `<h3>Local Tips</h3>`;
+        itinerary += `<h3 class="local-tips">Local Tips</h3>`;
         cityData.premiumExtras.localTips.forEach(tip => {
           itinerary += `<p>- ${tip}</p>`;
         });
@@ -558,7 +570,7 @@
       // Add Recommendations/Popular Section (Hidden for Free Tier)
       const recommendations = cityData.recommendations[budget];
       itinerary += `<div class="recommendations ${isPremium ? '' : 'hidden'}">`;
-      itinerary += `<h3>Popular Recommendations for Your Budget</h3>`;
+      itinerary += `<h3 class="recommendations">Popular Recommendations for Your Budget</h3>`;
       itinerary += `<p><strong>Activities:</strong></p>`;
       const filteredActivities = recommendations.activities.filter(activity => 
         activity.time === timeOfDay && activity.interest === interests
@@ -579,7 +591,7 @@
 
       if (!isPremium) {
         itinerary += `<div class="recommendations">`;
-        itinerary += `<h3>Popular Recommendations for Your Budget</h3>`;
+        itinerary += `<h3 class="recommendations">Popular Recommendations for Your Budget</h3>`;
         itinerary += `<p>Unlock personalized recommendations by subscribing to premium! Enter the code TRAVEL2025 to see more.</p>`;
         itinerary += `</div>`;
       }
@@ -633,20 +645,22 @@
       totalCost = transportCostTotal + activityCostTotal + restaurantCostTotal;
       const totalCostPerPerson = totalCost / persons;
 
-      const altTransportOptions = Object.keys(cityData.transport).filter(t => t !== transportOption);
-      const altTransport = altTransportOptions.length > 0 ? altTransportOptions[0] : transportOption;
-      const altTransportOption = cityData.transport[altTransport];
-
       itinerary += `<h3>Day 1 (Time of Day: ${timeOfDay.charAt(0).toUpperCase() + timeOfDay.slice(1)})</h3>`;
-      itinerary += `<p><strong>Transport:</strong> ${transport} ($${transportCostPerPerson.toFixed(2)} ${currency} per person, $${transportCostTotal.toFixed(2)} ${currency} total, <a href="${transportOption.url}" target="_blank">${transportOption.url}</a>)</p>`;
-      if (isPremium) itinerary += `<p><strong>Alternative Transport:</strong> ${altTransport} ($${convertCost(altTransportOption.cost).toFixed(2)} ${currency} per person, $${convertCost(altTransportOption.cost * persons).toFixed(2)} ${currency} total, <a href="${altTransportOption.url}" target="_blank">${altTransportOption.url}</a>)</p>`;
+      if (!isPremium) {
+        itinerary += `<p><strong>Transport:</strong> Detailed transport options (car, bus, train) including travel times and stops available with premium subscription!</p>`;
+      } else {
+        itinerary += `<p><strong>Transport Options:</strong></p>`;
+        itinerary += `<p>- Metro: $${convertCost(cityData.transport.metro.cost).toFixed(2)} ${currency} per person ($${convertCost(cityData.transport.metro.cost * persons).toFixed(2)} ${currency} total), Travel Time: ${cityData.transport.metro.details.time}, Stops: ${cityData.transport.metro.details.stops}, Station: ${cityData.transport.metro.details.station}, <a href="${cityData.transport.metro.url}" target="_blank">${cityData.transport.metro.url}</a></p>`;
+        itinerary += `<p>- Taxi: $${convertCost(cityData.transport.taxi.cost).toFixed(2)} ${currency} per person ($${convertCost(cityData.transport.taxi.cost * persons).toFixed(2)} ${currency} total), Travel Time: ${cityData.transport.taxi.details.time}, Stops: ${cityData.transport.taxi.details.stops}, <a href="${cityData.transport.taxi.url}" target="_blank">${cityData.transport.taxi.url}</a></p>`;
+        itinerary += `<p>- Train: $${convertCost(cityData.transport.train.cost).toFixed(2)} ${currency} per person ($${convertCost(cityData.transport.train.cost * persons).toFixed(2)} ${currency} total), Travel Time: ${cityData.transport.train.details.time}, Stops: ${cityData.transport.train.details.stops}, Station: ${cityData.transport.train.details.station}, <a href="${cityData.transport.train.url}" target="_blank">${cityData.transport.train.url}</a></p>`;
+      }
       itinerary += `<p><strong>Activity:</strong> ${activity.name} ($${activityCostPerPerson.toFixed(2)} ${currency} per person, $${activityCostTotal.toFixed(2)} ${currency} total, <a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
       itinerary += `<p><strong>Meal:</strong> ${restaurant.name} ($${restaurantCostPerPerson.toFixed(2)} ${currency} per person, $${restaurantCostTotal.toFixed(2)} ${currency} total, <a href="${restaurant.url}" target="_blank">${restaurant.url}</a>)</p>`;
       itinerary += `<p><strong>Total Estimated Cost:</strong> $${totalCost.toFixed(2)} ${currency} ($${totalCostPerPerson.toFixed(2)} ${currency} per person)</p>`;
 
       // Premium Extras
       if (isPremium) {
-        itinerary += `<h3>Premium Extras</h3>`;
+        itinerary += `<h3 class="premium-extras">Premium Extras</h3>`;
         itinerary += `<p><strong>Secondary Activity Suggestion:</strong></p>`;
         const secondaryActivities = cityData.premiumExtras.secondaryActivities.filter(activity => 
           activity.time === timeOfDay && activity.interest === interests
@@ -655,7 +669,7 @@
         itinerary += `<p>- ${secondaryActivity.name} ($${convertCost(secondaryActivity.cost).toFixed(2)} ${currency} per person, $${convertCost(secondaryActivity.cost * persons).toFixed(2)} ${currency} total, <a href="${secondaryActivity.url}" target="_blank">${secondaryActivity.url}</a>)</p>`;
 
         itinerary += `<div class="local-tip">`;
-        itinerary += `<h3>Local Tips</h3>`;
+        itinerary += `<h3 class="local-tips">Local Tips</h3>`;
         cityData.premiumExtras.localTips.forEach(tip => {
           itinerary += `<p>- ${tip}</p>`;
         });
@@ -667,7 +681,7 @@
       // Add Recommendations/Popular Section (Hidden for Free Tier)
       const recommendations = cityData.recommendations[budget];
       itinerary += `<div class="recommendations ${isPremium ? '' : 'hidden'}">`;
-      itinerary += `<h3>Popular Recommendations for Your Budget</h3>`;
+      itinerary += `<h3 class="recommendations">Popular Recommendations for Your Budget</h3>`;
       itinerary += `<p><strong>Activities:</strong></p>`;
       const filteredActivities = recommendations.activities.filter(activity => 
         activity.time === timeOfDay && activity.interest === interests
@@ -688,7 +702,7 @@
 
       if (!isPremium) {
         itinerary += `<div class="recommendations">`;
-        itinerary += `<h3>Popular Recommendations for Your Budget</h3>`;
+        itinerary += `<h3 class="recommendations">Popular Recommendations for Your Budget</h3>`;
         itinerary += `<p>Unlock personalized recommendations by subscribing to premium! Enter the code TRAVEL2025 to see more.</p>`;
         itinerary += `</div>`;
       }
