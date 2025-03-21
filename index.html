@@ -12,8 +12,21 @@
     }
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      background: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2073&auto=format&fit=crop') no-repeat center center fixed;
+      background-size: cover;
       line-height: 1.6;
+      color: #333;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* Dark overlay for readability */
+      z-index: -1;
     }
     .container {
       max-width: 900px;
@@ -22,14 +35,15 @@
     }
     h1, h2, h3 {
       text-align: center;
-      color: #333;
+      color: #fff;
       margin-bottom: 20px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     }
     form {
-      background-color: #fff;
+      background-color: rgba(255, 255, 255, 0.9);
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
       display: flex;
       flex-direction: column;
       gap: 15px;
@@ -64,10 +78,10 @@
     }
     #output {
       margin-top: 20px;
-      background-color: #fff;
+      background-color: rgba(255, 255, 255, 0.9);
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     }
     .error {
       color: #d9534f;
@@ -154,6 +168,7 @@
           <option value="nature">Nature</option>
           <option value="adventure">Adventure</option>
           <option value="shopping">Shopping</option>
+          <option value="kids">Kids</option>
         </select>
       </div>
       <div class="form-row">
@@ -306,6 +321,13 @@
                 { "name": "Le Marais Boutiques", "cost": 0, "url": "https://www.paris.fr/lieux/le-marais-1801", "time": "afternoon" },
                 { "name": "Marché aux Puces", "cost": 0, "url": "https://marcheauxpuces-saintouen.com/en/", "time": "morning" },
                 { "name": "Passage des Panoramas", "cost": 0, "url": "https://www.paris.fr/lieux/passage-des-panoramas-1803", "time": "afternoon" }
+              ],
+              "kids": [
+                { "name": "Disneyland Paris", "cost": 60, "url": "https://www.disneylandparis.com/en-us/", "time": "afternoon" },
+                { "name": "Parc de la Villette - Cité des Enfants", "cost": 12, "url": "https://www.cite-sciences.fr/en/children", "time": "morning" },
+                { "name": "Jardin d’Acclimatation", "cost": 5, "url": "https://www.jardindacclimatation.fr/en", "time": "afternoon" },
+                { "name": "Paris Zoo (Parc Zoologique)", "cost": 20, "url": "https://www.parczoologiquedeparis.fr/en", "time": "morning" },
+                { "name": "Aquarium de Paris", "cost": 25, "url": "https://www.aquariumdeparis.com/en", "time": "afternoon" }
               ]
             },
             "recommendations": {
@@ -447,10 +469,14 @@
       const restaurant = restaurants.length > 0 ? restaurants[0] : cityData.restaurants[food].find(r => r.budget === budget) || cityData.restaurants[food][0];
 
       // Calculate costs based on number of persons
-      const transportCost = transportOption.cost * persons;
-      const activityCost = activity.cost * persons;
-      const restaurantCost = restaurant.cost * persons;
-      totalCost = convertCost(transportCost + activityCost + restaurantCost);
+      const transportCostPerPerson = convertCost(transportOption.cost);
+      const transportCostTotal = convertCost(transportOption.cost * persons);
+      const activityCostPerPerson = convertCost(activity.cost);
+      const activityCostTotal = convertCost(activity.cost * persons);
+      const restaurantCostPerPerson = convertCost(restaurant.cost);
+      const restaurantCostTotal = convertCost(restaurant.cost * persons);
+      totalCost = transportCostTotal + activityCostTotal + restaurantCostTotal;
+      const totalCostPerPerson = totalCost / persons;
 
       // Check budget constraints (per person budget)
       let budgetLimit;
@@ -459,17 +485,16 @@
         case "medium": budgetLimit = 150; break;
         case "high": budgetLimit = Infinity; break;
       }
-      const totalCostPerPerson = totalCost / persons;
       if (totalCostPerPerson > budgetLimit) {
         itinerary += `<p class="error">Warning: Total cost per person ($${totalCostPerPerson.toFixed(2)} ${currency}) exceeds your budget range. Consider adjusting your preferences.</p>`;
       }
 
       itinerary += `<h3>Day 1 (Time of Day: ${timeOfDay.charAt(0).toUpperCase() + timeOfDay.slice(1)})</h3>`;
-      itinerary += `<p><strong>Transport:</strong> ${transport} ($${convertCost(transportCost)} ${currency}, <a href="${transportOption.url}" target="_blank">${transportOption.url}</a>)</p>`;
-      if (isPremium) itinerary += `<p><strong>Alternative Transport:</strong> ${altTransport} ($${convertCost(altTransportOption.cost * persons)} ${currency}, <a href="${altTransportOption.url}" target="_blank">${altTransportOption.url}</a>)</p>`;
-      itinerary += `<p><strong>Activity:</strong> ${activity.name} ($${convertCost(activityCost)} ${currency}, <a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
-      itinerary += `<p><strong>Meal:</strong> ${restaurant.name} ($${convertCost(restaurantCost)} ${currency}, <a href="${restaurant.url}" target="_blank">${restaurant.url}</a>)</p>`;
-      itinerary += `<p><strong>Total Estimated Cost:</strong> $${totalCost} ${currency} ($${totalCostPerPerson.toFixed(2)} ${currency} per person)</p>`;
+      itinerary += `<p><strong>Transport:</strong> ${transport} ($${transportCostPerPerson.toFixed(2)} ${currency} per person, $${transportCostTotal.toFixed(2)} ${currency} total, <a href="${transportOption.url}" target="_blank">${transportOption.url}</a>)</p>`;
+      if (isPremium) itinerary += `<p><strong>Alternative Transport:</strong> ${altTransport} ($${convertCost(altTransportOption.cost).toFixed(2)} ${currency} per person, $${convertCost(altTransportOption.cost * persons).toFixed(2)} ${currency} total, <a href="${altTransportOption.url}" target="_blank">${altTransportOption.url}</a>)</p>`;
+      itinerary += `<p><strong>Activity:</strong> ${activity.name} ($${activityCostPerPerson.toFixed(2)} ${currency} per person, $${activityCostTotal.toFixed(2)} ${currency} total, <a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
+      itinerary += `<p><strong>Meal:</strong> ${restaurant.name} ($${restaurantCostPerPerson.toFixed(2)} ${currency} per person, $${restaurantCostTotal.toFixed(2)} ${currency} total, <a href="${restaurant.url}" target="_blank">${restaurant.url}</a>)</p>`;
+      itinerary += `<p><strong>Total Estimated Cost:</strong> $${totalCost.toFixed(2)} ${currency} ($${totalCostPerPerson.toFixed(2)} ${currency} per person)</p>`;
 
       // Premium Extras
       if (isPremium) {
@@ -479,7 +504,7 @@
           activity.time === timeOfDay
         );
         const secondaryActivity = secondaryActivities.length > 0 ? secondaryActivities[0] : cityData.premiumExtras.secondaryActivities[0];
-        itinerary += `<p>- ${secondaryActivity.name} ($${convertCost(secondaryActivity.cost * persons)} ${currency}, <a href="${secondaryActivity.url}" target="_blank">${secondaryActivity.url}</a>)</p>`;
+        itinerary += `<p>- ${secondaryActivity.name} ($${convertCost(secondaryActivity.cost).toFixed(2)} ${currency} per person, $${convertCost(secondaryActivity.cost * persons).toFixed(2)} ${currency} total, <a href="${secondaryActivity.url}" target="_blank">${secondaryActivity.url}</a>)</p>`;
 
         itinerary += `<div class="local-tip">`;
         itinerary += `<h3>Local Tips</h3>`;
@@ -497,11 +522,11 @@
       itinerary += `<h3>Popular Recommendations for Your Budget</h3>`;
       itinerary += `<p><strong>Activities:</strong></p>`;
       recommendations.activities.forEach(activity => {
-        itinerary += `<p>- ${activity.name} ($${convertCost(activity.cost * persons)} ${currency}, <a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
+        itinerary += `<p>- ${activity.name} ($${convertCost(activity.cost).toFixed(2)} ${currency} per person, $${convertCost(activity.cost * persons).toFixed(2)} ${currency} total, <a href="${activity.url}" target="_blank">${activity.url}</a>)</p>`;
       });
       itinerary += `<p><strong>Dining:</strong></p>`;
       recommendations.restaurants.forEach(restaurant => {
-        itinerary += `<p>- ${restaurant.name} ($${convertCost(restaurant.cost * persons)} ${currency}, <a href="${restaurant.url}" target="_blank">${restaurant.url}</a>, ${restaurant.type})</p>`;
+        itinerary += `<p>- ${restaurant.name} ($${convertCost(restaurant.cost).toFixed(2)} ${currency} per person, $${convertCost(restaurant.cost * persons).toFixed(2)} ${currency} total, <a href="${restaurant.url}" target="_blank">${restaurant.url}</a>, ${restaurant.type})</p>`;
       });
       itinerary += `</div>`;
 
