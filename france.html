@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>France Travel Itinerary Builder</title>
+  <title>Paris - Choose Your Preferences</title>
   <style>
     * {
       box-sizing: border-box;
@@ -20,14 +20,13 @@
       margin: 20px auto;
       padding: 0 15px;
     }
-    h1 {
+    h1, h2, h3 {
       text-align: center;
       color: #333;
       margin-bottom: 20px;
     }
-    h2 {
-      color: #333;
-      margin-top: 20px;
+    p {
+      margin: 10px 0;
     }
     ul {
       list-style: none;
@@ -43,6 +42,13 @@
     a:hover {
       text-decoration: underline;
     }
+    .preferences {
+      margin: 20px 0;
+      padding: 15px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
     @media (max-width: 600px) {
       .container {
         padding: 0 10px;
@@ -50,7 +56,7 @@
       h1 {
         font-size: 24px;
       }
-      h2 {
+      h2, h3 {
         font-size: 20px;
       }
     }
@@ -58,32 +64,20 @@
 </head>
 <body>
   <div class="container">
-    <h1>France Travel Itinerary Builder</h1>
-    <p>Select a city to explore a 1-day free itinerary. Upgrade to premium for your full trip!</p>
-    <h2>Cities in France</h2>
-    <ul>
-      <li><a href="france/paris.html">Paris</a></li>
-      <li><a href="france/lyon.html">Lyon</a></li>
-      <li><a href="france/marseille.html">Marseille</a></li>
-      <li><a href="france/nice.html">Nice</a></li>
-      <li><a href="france/bordeaux.html">Bordeaux</a></li>
-      <li><a href="france/toulouse.html">Toulouse</a></li>
-      <li><a href="france/strasbourg.html">Strasbourg</a></li>
-      <li><a href="france/lille.html">Lille</a></li>
-      <li><a href="france/nantes.html">Nantes</a></li>
-      <li><a href="france/montpellier.html">Montpellier</a></li>
-      <li><a href="france/rennes.html">Rennes</a></li>
-      <li><a href="france/grenoble.html">Grenoble</a></li>
-      <li><a href="france/dijon.html">Dijon</a></li>
-      <li><a href="france/aix-en-provence.html">Aix-en-Provence</a></li>
-      <li><a href="france/avignon.html">Avignon</a></li>
-      <li><a href="france/cannes.html">Cannes</a></li>
-      <li><a href="france/biarritz.html">Biarritz</a></li>
-      <li><a href="france/reims.html">Reims</a></li>
-      <li><a href="france/annecy.html">Annecy</a></li>
-      <li><a href="france/tours.html">Tours</a></li>
-    </ul>
-    <p style="text-align: center;"><a href="index.html">Back to Countries</a></p>
+    <h1>Paris - Choose Your Preferences</h1>
+    <p>Customize your 1-day free itinerary for Paris by selecting your preferences below. Upgrade to premium for your full trip!</p>
+    <div class="preferences">
+      <h2>Choose Your Interest</h2>
+      <p>What are you most interested in exploring in Paris?</p>
+      <ul>
+        <li><a href="france/paris-art.html">Art</a></li>
+        <li><a href="france/paris-history.html">History</a></li>
+        <li><a href="france/paris-nature.html">Nature</a></li>
+        <li><a href="france/paris-adventure.html">Adventure</a></li>
+        <li><a href="france/paris-shopping.html">Shopping</a></li>
+      </ul>
+    </div>
+    <p style="text-align: center;"><a href="../france.html">Back to France Cities</a> | <a href="../index.html">Back to Countries</a></p>
   </div>
 </body>
 </html>
